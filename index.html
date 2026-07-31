@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>codvib — Frontend-разработчик</title>
+<meta name="description" content="Начинающий frontend-разработчик. Делаю лендинги и веб-интерфейсы в связке с AI-инструментами. Портфолио, навыки, услуги.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #08090A;
+    --bg-card: #101211;
+    --border: #1E211D;
+    --amber: #C9944A;
+    --amber-dim: #4A3A20;
+    --teal: #3D8A72;
+    --text: #E4E4DC;
+    --text-dim: #6E7268;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .bg-noise {
+    background-image: radial-gradient(rgba(201,148,74,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .card:hover { border-color: var(--amber-dim); transform: translateY(-3px); }
+
+  .cursor-blink::after {
+    content: '_';
+    color: var(--amber);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .btn-amber {
+    background: var(--amber);
+    color: #08090A;
+    transition: transform .15s ease, box-shadow .2s ease;
+  }
+  .btn-amber:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -8px rgba(201,148,74,0.45); }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .lang-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .lang-btn.active {
+    color: var(--amber);
+    border-color: var(--amber-dim);
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body class="bg-noise antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#08090A]/85 border-b border-[var(--border)]">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5 shrink-0">
+      <div class="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-sm" style="background: var(--amber); color: #08090A;">&lt;/&gt;</div>
+      <span class="font-display font-semibold text-sm tracking-wide">codvib</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-mono text-[var(--text-dim)]">
+      <a href="#projects" class="hover:text-[var(--amber)] transition-colors" data-i18n="nav_projects">проекты</a>
+      <a href="#skills" class="hover:text-[var(--amber)] transition-colors" data-i18n="nav_skills">навыки</a>
+      <a href="#services" class="hover:text-[var(--amber)] transition-colors" data-i18n="nav_services">услуги</a>
+      <a href="#contact" class="hover:text-[var(--amber)] transition-colors" data-i18n="nav_contact">контакты</a>
+    </nav>
+    <div class="flex items-center gap-3 shrink-0">
+      <div class="flex items-center gap-1">
+        <button class="lang-btn px-2 py-1 rounded" data-lang="ru">RU</button>
+        <button class="lang-btn px-2 py-1 rounded" data-lang="en">EN</button>
+        <button class="lang-btn px-2 py-1 rounded" data-lang="ua">UA</button>
+      </div>
+      <a href="#contact" class="btn-amber text-xs font-semibold px-4 py-2 rounded-lg whitespace-nowrap" data-i18n="nav_cta">Написать мне</a>
+    </div>
+  </div>
+</header>
+
+<main class="pt-28 pb-16 max-w-5xl mx-auto px-5 sm:px-8">
+
+  <!-- Hero -->
+  <section class="mb-24 relative">
+    <div class="absolute top-10 left-1/4 w-72 h-72 rounded-full blur-[110px] -z-10" style="background: rgba(201,148,74,0.08);"></div>
+
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] font-mono text-xs mb-6" style="color: var(--teal);">
+      <span class="w-1.5 h-1.5 rounded-full" style="background: var(--teal);"></span>
+      <span data-i18n="hero_badge">свободен для новых проектов</span>
+    </div>
+
+    <p class="font-mono text-sm mb-3" style="color: var(--amber);">$ whoami<span class="cursor-blink"></span></p>
+    <h1 class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5">
+      <span data-i18n="hero_title1">Привет.</span><br>
+      <span data-i18n="hero_title2_pre">Я — </span><span style="color: var(--amber);" data-i18n="hero_title2_role">frontend-разработчик</span><span data-i18n="hero_title2_post">, который делает быстро и по делу.</span>
+    </h1>
+    <p class="max-w-xl text-[var(--text-dim)] text-sm sm:text-base leading-relaxed mb-8" data-i18n="hero_desc">
+      Собираю лендинги и веб-интерфейсы в связке с современными AI-инструментами разработки — это позволяет получать чистый код и продуманный результат в короткие сроки. Учусь каждый день и люблю доводить проект до состояния «можно показывать».
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      <a href="#projects" class="btn-amber font-semibold text-sm px-6 py-3 rounded-xl" data-i18n="hero_btn_projects">Смотреть проекты</a>
+      <a href="https://github.com/platypuses888/save30" target="_blank" rel="noopener noreferrer" class="font-mono text-sm px-6 py-3 rounded-xl border border-[var(--border)] hover:border-[var(--amber-dim)] transition-colors">GitHub →</a>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="mb-24">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-1.5 h-6 rounded-full" style="background: var(--amber);"></div>
+      <h2 class="font-display font-bold text-xl uppercase tracking-wide" data-i18n="projects_heading">Проекты</h2>
+    </div>
+    <p class="text-[var(--text-dim)] text-sm mb-8 ml-5" data-i18n="projects_sub">Экосистема Save30 — пять связанных проектов на одну тему.</p>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="tag px-2.5 py-1 rounded-md" data-i18n="proj1_tag">Лендинг</span>
+          </div>
+          <h3 class="font-display font-bold text-lg mb-2">Save30</h3>
+          <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-5" data-i18n="proj1_desc">Продающая страница с интерактивным калькулятором экономии и понятной структурой офера.</p>
+        </div>
+        <a href="https://platypuses888.github.io/save30/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold flex items-center gap-1.5" style="color: var(--amber);"><span data-i18n="link_open">Открыть</span> <span>→</span></a>
+      </div>
+
+      <div class="card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="tag px-2.5 py-1 rounded-md" data-i18n="proj2_tag">Веб-приложение</span>
+          </div>
+          <h3 class="font-display font-bold text-lg mb-2">Save30 Web App</h3>
+          <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-5" data-i18n="proj2_desc">Авторизация, трекер финансовых привычек и фича «Пауза на импульс» с реальной интерактивной логикой.</p>
+        </div>
+        <a href="https://platypuses888.github.io/save30/save30-webapp.html" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold flex items-center gap-1.5" style="color: var(--amber);"><span data-i18n="link_open">Открыть</span> <span>→</span></a>
+      </div>
+
+      <div class="card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="tag px-2.5 py-1 rounded-md" data-i18n="proj3_tag">Дашборд</span>
+          </div>
+          <h3 class="font-display font-bold text-lg mb-2">Save30 Insights</h3>
+          <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-5" data-i18n="proj3_desc">Финансовая аналитика с графиками, разбивкой по категориям и AI-инсайтами по бюджету.</p>
+        </div>
+        <a href="https://platypuses888.github.io/save30/save30-insights.html" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold flex items-center gap-1.5" style="color: var(--amber);"><span data-i18n="link_open">Открыть</span> <span>→</span></a>
+      </div>
+
+      <div class="card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="tag px-2.5 py-1 rounded-md" data-i18n="proj4_tag">E-commerce</span>
+          </div>
+          <h3 class="font-display font-bold text-lg mb-2">Save30 Store</h3>
+          <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-5" data-i18n="proj4_desc">Каталог товаров с умной проверкой бюджета — покупка блокируется, если товар не вписывается в лимит.</p>
+        </div>
+        <a href="https://platypuses888.github.io/save30/save30-store.html" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold flex items-center gap-1.5" style="color: var(--amber);"><span data-i18n="link_open">Открыть</span> <span>→</span></a>
+      </div>
+
+      <div class="card p-6 rounded-2xl flex flex-col justify-between sm:col-span-2">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="tag px-2.5 py-1 rounded-md" data-i18n="proj5_tag">SaaS-платформа</span>
+          </div>
+          <h3 class="font-display font-bold text-lg mb-2">Save30 AI Pro</h3>
+          <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-5" data-i18n="proj5_desc">Подписочная SaaS-платформа с AI-финансовым копилотом, симулятором капитала и тарифными планами.</p>
+        </div>
+        <a href="https://platypuses888.github.io/save30/save30-ai-saas.html" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold flex items-center gap-1.5" style="color: var(--amber);"><span data-i18n="link_open">Открыть</span> <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="mb-24">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-1.5 h-6 rounded-full" style="background: var(--teal);"></div>
+      <h2 class="font-display font-bold text-xl uppercase tracking-wide" data-i18n="skills_heading">Навыки</h2>
+    </div>
+    <p class="text-[var(--text-dim)] text-sm mb-8 ml-5" data-i18n="skills_sub">С чем я уверенно работаю прямо сейчас.</p>
+
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div class="card p-6 rounded-2xl">
+        <h3 class="font-display font-semibold mb-3" style="color: var(--amber);" data-i18n="skill1_title">Фронтенд</h3>
+        <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-4" data-i18n="skill1_desc">Адаптивная вёрстка, интерактивные интерфейсы, вёрстка по готовому макету.</p>
+        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-[var(--text-dim)]">
+          <span class="tag px-2 py-1 rounded">HTML5</span>
+          <span class="tag px-2 py-1 rounded">CSS3</span>
+          <span class="tag px-2 py-1 rounded">Tailwind</span>
+          <span class="tag px-2 py-1 rounded">JavaScript</span>
+        </div>
+      </div>
+      <div class="card p-6 rounded-2xl">
+        <h3 class="font-display font-semibold mb-3" style="color: var(--amber);" data-i18n="skill2_title">Форматы</h3>
+        <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-4" data-i18n="skill2_desc">От одностраничных лендингов до многоэкранных интерфейсов с состояниями.</p>
+        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-[var(--text-dim)]">
+          <span class="tag px-2 py-1 rounded">Landing Page</span>
+          <span class="tag px-2 py-1 rounded">SPA</span>
+          <span class="tag px-2 py-1 rounded">UI/UX</span>
+        </div>
+      </div>
+      <div class="card p-6 rounded-2xl">
+        <h3 class="font-display font-semibold mb-3" style="color: var(--amber);" data-i18n="skill3_title">Подход</h3>
+        <p class="text-[var(--text-dim)] text-sm leading-relaxed mb-4" data-i18n="skill3_desc">Разработка в связке с AI-инструментами для быстрого и аккуратного результата.</p>
+        <div class="flex flex-wrap gap-1.5 font-mono text-xs text-[var(--text-dim)]">
+          <span class="tag px-2 py-1 rounded">AI-assisted dev</span>
+          <span class="tag px-2 py-1 rounded">WordPress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="mb-24">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-1.5 h-6 rounded-full" style="background: var(--amber);"></div>
+      <h2 class="font-display font-bold text-xl uppercase tracking-wide" data-i18n="services_heading">Услуги</h2>
+    </div>
+    <p class="text-[var(--text-dim)] text-sm mb-8 ml-5" data-i18n="services_sub">Что можно заказать уже сейчас.</p>
+
+    <div class="space-y-4">
+      <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 class="font-display font-bold mb-1" data-i18n="serv1_title">Продающий лендинг</h3>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv1_desc">Одностраничный сайт под ваш продукт: от идеи до готового кода за пару дней.</p>
+        </div>
+        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 3 000 ₽</span>
+      </div>
+      <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 class="font-display font-bold mb-1" data-i18n="serv2_title">Доработка сайта</h3>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv2_desc">Редизайн, правки вёрстки, новые блоки на существующем сайте.</p>
+        </div>
+        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 2 000 ₽</span>
+      </div>
+      <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 class="font-display font-bold mb-1" data-i18n="serv3_title">Интерактивное веб-приложение</h3>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv3_desc">Интерфейс с состояниями и логикой: формы, трекеры, личные кабинеты.</p>
+        </div>
+        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 6 000 ₽</span>
+      </div>
+      <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 class="font-display font-bold mb-1" data-i18n="serv4_title">Telegram-боты</h3>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv4_desc">Простые боты для сообществ и бизнеса: приём заявок, рассылки, базовая логика диалога.</p>
+        </div>
+        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 4 000 ₽</span>
+      </div>
+      <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 class="font-display font-bold mb-1" data-i18n="serv5_title">Discord-боты</h3>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv5_desc">Боты для модерации, ролей и мини-функций сервера под ваши задачи.</p>
+        </div>
+        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 4 000 ₽</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="mb-24">
+    <div class="card p-8 sm:p-10 rounded-3xl">
+      <p class="font-mono text-xs mb-3" style="color: var(--teal);" data-i18n="about_label">## обо мне</p>
+      <p class="text-[var(--text-dim)] text-sm sm:text-base leading-relaxed max-w-2xl" data-i18n="about_text">
+        Начал заниматься веб-разработкой недавно, но подхожу к делу серьёзно: слежу за деталями, довожу интерфейсы до рабочего состояния, а не до уровня статичного макета, и честно оцениваю сроки — даже когда осваиваю что-то новое впервые. Открыт к удалённым проектам.
+      </p>
+    </div>
+  </section>
+
+  <!-- Clock widget -->
+  <section class="mb-24">
+    <div class="card p-6 rounded-2xl inline-flex flex-col gap-1 min-w-[220px]">
+      <p class="font-mono text-xs" style="color: var(--teal);" data-i18n="clock_label">Время в Москве</p>
+      <p class="font-display font-bold text-2xl" id="clock-time">--:--:--</p>
+      <p class="text-[var(--text-dim)] text-sm" id="clock-date">—</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-1.5 h-6 rounded-full" style="background: var(--teal);"></div>
+      <h2 class="font-display font-bold text-xl uppercase tracking-wide" data-i18n="contact_heading">Контакты</h2>
+    </div>
+    <div class="card p-8 sm:p-10 rounded-3xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+      <div class="space-y-2 font-mono text-sm">
+        <div class="flex items-center gap-2 text-[var(--text-dim)]"><span style="color: var(--amber);" data-i18n="contact_email_label">почта</span> overstep@tutamail.com</div>
+      </div>
+      <a href="https://t.me/codvib" target="_blank" rel="noopener noreferrer" class="btn-amber font-semibold text-sm px-6 py-3 rounded-xl text-center" data-i18n="contact_btn">Написать в Telegram</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-[var(--border)] py-8 text-center text-[var(--text-dim)] text-xs font-mono">
+  <span data-i18n="footer_text">© 2026 codvib. Портфолио сделано на HTML, Tailwind CSS и JavaScript.</span>
+</footer>
+
+<script>
+  const translations = {
+    ru: {
+      nav_projects: "проекты", nav_skills: "навыки", nav_services: "услуги", nav_contact: "контакты", nav_cta: "Написать мне",
+      hero_badge: "свободен для новых проектов",
+      hero_title1: "Привет.", hero_title2_pre: "Я — ", hero_title2_role: "frontend-разработчик", hero_title2_post: ", который делает быстро и по делу.",
+      hero_desc: "Собираю лендинги и веб-интерфейсы в связке с современными AI-инструментами разработки — это позволяет получать чистый код и продуманный результат в короткие сроки. Учусь каждый день и люблю доводить проект до состояния «можно показывать».",
+      hero_btn_projects: "Смотреть проекты",
+      projects_heading: "Проекты", projects_sub: "Экосистема Save30 — пять связанных проектов на одну тему.",
+      link_open: "Открыть",
+      proj1_tag: "Лендинг", proj1_desc: "Продающая страница с интерактивным калькулятором экономии и понятной структурой офера.",
+      proj2_tag: "Веб-приложение", proj2_desc: "Авторизация, трекер финансовых привычек и фича «Пауза на импульс» с реальной интерактивной логикой.",
+      proj3_tag: "Дашборд", proj3_desc: "Финансовая аналитика с графиками, разбивкой по категориям и AI-инсайтами по бюджету.",
+      proj4_tag: "E-commerce", proj4_desc: "Каталог товаров с умной проверкой бюджета — покупка блокируется, если товар не вписывается в лимит.",
+      proj5_tag: "SaaS-платформа", proj5_desc: "Подписочная SaaS-платформа с AI-финансовым копилотом, симулятором капитала и тарифными планами.",
+      skills_heading: "Навыки", skills_sub: "С чем я уверенно работаю прямо сейчас.",
+      skill1_title: "Фронтенд", skill1_desc: "Адаптивная вёрстка, интерактивные интерфейсы, вёрстка по готовому макету.",
+      skill2_title: "Форматы", skill2_desc: "От одностраничных лендингов до многоэкранных интерфейсов с состояниями.",
+      skill3_title: "Подход", skill3_desc: "Разработка в связке с AI-инструментами для быстрого и аккуратного результата.",
+      services_heading: "Услуги", services_sub: "Что можно заказать уже сейчас.",
+      serv1_title: "Продающий лендинг", serv1_desc: "Одностраничный сайт под ваш продукт: от идеи до готового кода за пару дней.",
+      serv2_title: "Доработка сайта", serv2_desc: "Редизайн, правки вёрстки, новые блоки на существующем сайте.",
+      serv3_title: "Интерактивное веб-приложение", serv3_desc: "Интерфейс с состояниями и логикой: формы, трекеры, личные кабинеты.",
+      serv4_title: "Telegram-боты", serv4_desc: "Простые боты для сообществ и бизнеса: приём заявок, рассылки, базовая логика диалога.",
+      serv5_title: "Discord-боты", serv5_desc: "Боты для модерации, ролей и мини-функций сервера под ваши задачи.",
+      about_label: "## обо мне",
+      about_text: "Начал заниматься веб-разработкой недавно, но подхожу к делу серьёзно: слежу за деталями, довожу интерфейсы до рабочего состояния, а не до уровня статичного макета, и честно оцениваю сроки — даже когда осваиваю что-то новое впервые. Открыт к удалённым проектам.",
+      clock_label: "Время в Москве",
+      contact_heading: "Контакты", contact_email_label: "почта", contact_btn: "Написать в Telegram",
+      footer_text: "© 2026 codvib. Портфолио сделано на HTML, Tailwind CSS и JavaScript."
+    },
+    en: {
+      nav_projects: "projects", nav_skills: "skills", nav_services: "services", nav_contact: "contact", nav_cta: "Contact me",
+      hero_badge: "available for new projects",
+      hero_title1: "Hey there.", hero_title2_pre: "I'm a ", hero_title2_role: "frontend developer", hero_title2_post: " who ships fast and keeps it clean.",
+      hero_desc: "I build landing pages and web interfaces using modern AI-assisted development tools — that means clean code and a polished result in a short time. Learning every day and I love taking a project all the way to 'ready to show'.",
+      hero_btn_projects: "View projects",
+      projects_heading: "Projects", projects_sub: "The Save30 ecosystem — five connected projects around one theme.",
+      link_open: "Open",
+      proj1_tag: "Landing page", proj1_desc: "A sales page with an interactive savings calculator and a clear offer structure.",
+      proj2_tag: "Web app", proj2_desc: "Auth, a financial habit tracker, and a 'Pause the impulse' feature with real interactive logic.",
+      proj3_tag: "Dashboard", proj3_desc: "Financial analytics with charts, category breakdowns, and AI-driven budget insights.",
+      proj4_tag: "E-commerce", proj4_desc: "A product catalog with smart budget checks — checkout is blocked if an item exceeds the limit.",
+      proj5_tag: "SaaS platform", proj5_desc: "A subscription SaaS platform with an AI finance copilot, a capital simulator, and pricing tiers.",
+      skills_heading: "Skills", skills_sub: "What I work with confidently right now.",
+      skill1_title: "Frontend", skill1_desc: "Responsive layouts, interactive interfaces, pixel-accurate implementation from a mockup.",
+      skill2_title: "Formats", skill2_desc: "From single-page landers to multi-screen interfaces with real state.",
+      skill3_title: "Approach", skill3_desc: "AI-assisted development for a fast, polished result.",
+      services_heading: "Services", services_sub: "What you can order right now.",
+      serv1_title: "Landing page", serv1_desc: "A single-page site for your product: from idea to working code in a couple of days.",
+      serv2_title: "Site revamp", serv2_desc: "Redesign, layout fixes, new blocks on an existing site.",
+      serv3_title: "Interactive web app", serv3_desc: "A stateful interface with real logic: forms, trackers, personal accounts.",
+      serv4_title: "Telegram bots", serv4_desc: "Simple bots for communities and businesses: lead capture, broadcasts, basic dialog logic.",
+      serv5_title: "Discord bots", serv5_desc: "Bots for moderation, roles, and small server utilities tailored to your needs.",
+      about_label: "## about me",
+      about_text: "I started in web development recently, but I take it seriously: I pay attention to detail, finish interfaces to a working state rather than a static mockup, and give honest timelines — even when I'm learning something new. Open to remote projects.",
+      clock_label: "Time in Moscow",
+      contact_heading: "Contact", contact_email_label: "email", contact_btn: "Message on Telegram",
+      footer_text: "© 2026 codvib. Portfolio built with HTML, Tailwind CSS and JavaScript."
+    },
+    ua: {
+      nav_projects: "проєкти", nav_skills: "навички", nav_services: "послуги", nav_contact: "контакти", nav_cta: "Написати мені",
+      hero_badge: "вільний для нових проєктів",
+      hero_title1: "Привіт.", hero_title2_pre: "Я — ", hero_title2_role: "frontend-розробник", hero_title2_post: ", який робить швидко і по суті.",
+      hero_desc: "Створюю лендінги та веб-інтерфейси у зв'язці з сучасними AI-інструментами розробки — це дозволяє отримувати чистий код і продуманий результат у короткі терміни. Вчуся щодня і люблю доводити проєкт до стану «можна показувати».",
+      hero_btn_projects: "Дивитись проєкти",
+      projects_heading: "Проєкти", projects_sub: "Екосистема Save30 — п'ять пов'язаних проєктів на одну тему.",
+      link_open: "Відкрити",
+      proj1_tag: "Лендінг", proj1_desc: "Продавальна сторінка з інтерактивним калькулятором економії та зрозумілою структурою офера.",
+      proj2_tag: "Веб-застосунок", proj2_desc: "Авторизація, трекер фінансових звичок та фіча «Пауза на імпульс» з реальною інтерактивною логікою.",
+      proj3_tag: "Дашборд", proj3_desc: "Фінансова аналітика з графіками, розбивкою по категоріях та AI-інсайтами щодо бюджету.",
+      proj4_tag: "E-commerce", proj4_desc: "Каталог товарів з розумною перевіркою бюджету — покупка блокується, якщо товар не вписується в ліміт.",
+      proj5_tag: "SaaS-платформа", proj5_desc: "Підписна SaaS-платформа з AI-фінансовим копілотом, симулятором капіталу та тарифними планами.",
+      skills_heading: "Навички", skills_sub: "З чим я впевнено працюю прямо зараз.",
+      skill1_title: "Фронтенд", skill1_desc: "Адаптивна верстка, інтерактивні інтерфейси, верстка за готовим макетом.",
+      skill2_title: "Формати", skill2_desc: "Від односторінкових лендінгів до багатоекранних інтерфейсів зі станами.",
+      skill3_title: "Підхід", skill3_desc: "Розробка у зв'язці з AI-інструментами для швидкого й акуратного результату.",
+      services_heading: "Послуги", services_sub: "Що можна замовити вже зараз.",
+      serv1_title: "Продавальний лендінг", serv1_desc: "Односторінковий сайт під ваш продукт: від ідеї до готового коду за пару днів.",
+      serv2_title: "Доопрацювання сайту", serv2_desc: "Редизайн, правки верстки, нові блоки на наявному сайті.",
+      serv3_title: "Інтерактивний веб-застосунок", serv3_desc: "Інтерфейс зі станами і логікою: форми, трекери, особисті кабінети.",
+      serv4_title: "Telegram-боти", serv4_desc: "Прості боти для спільнот і бізнесу: приймання заявок, розсилки, базова логіка діалогу.",
+      serv5_title: "Discord-боти", serv5_desc: "Боти для модерації, ролей та міні-функцій сервера під ваші задачі.",
+      about_label: "## про мене",
+      about_text: "Почав займатися веброзробкою нещодавно, але підходжу до справи серйозно: стежу за деталями, доводжу інтерфейси до робочого стану, а не до рівня статичного макета, і чесно оцінюю терміни — навіть коли освоюю щось нове вперше. Відкритий до віддалених проєктів.",
+      clock_label: "Час у Москві",
+      contact_heading: "Контакти", contact_email_label: "пошта", contact_btn: "Написати в Telegram",
+      footer_text: "© 2026 codvib. Портфоліо зроблено на HTML, Tailwind CSS і JavaScript."
+    }
+  };
+
+  let currentLang = 'ru';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    const dict = translations[lang] || translations.ru;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    updateClock(lang);
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  // Live clock — time in Moscow, formatted per selected language
+  function updateClock(lang) {
+    const localeMap = { ru: 'ru-RU', en: 'en-GB', ua: 'uk-UA' };
+    const locale = localeMap[lang] || 'ru-RU';
+    const now = new Date();
+    const timeFmt = new Intl.DateTimeFormat(locale, {
+      timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+    const dateFmt = new Intl.DateTimeFormat(locale, {
+      timeZone: 'Europe/Moscow', weekday: 'long', day: 'numeric', month: 'long'
+    });
+    document.getElementById('clock-time').textContent = timeFmt.format(now);
+    document.getElementById('clock-date').textContent = dateFmt.format(now);
+  }
+
+  setInterval(() => updateClock(currentLang), 1000);
+  applyLanguage('ru');
+</script>
+
+</body>
+</html>
