@@ -11,21 +11,21 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root {
-    --bg: #08090A;
-    --bg-card: #101211;
-    --border: #1E211D;
-    --amber: #C9944A;
-    --amber-dim: #4A3A20;
-    --teal: #3D8A72;
-    --text: #E4E4DC;
-    --text-dim: #6E7268;
+    --bg: #17181A;
+    --bg-card: #212326;
+    --border: #34373B;
+    --amber: #F2F2F0;
+    --amber-dim: #55595E;
+    --teal: #B9BDC2;
+    --text: #F6F6F5;
+    --text-dim: #A9ADB2;
   }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
   .font-display { font-family: 'Space Grotesk', sans-serif; }
   .font-mono { font-family: 'JetBrains Mono', monospace; }
 
   .bg-noise {
-    background-image: radial-gradient(rgba(201,148,74,0.04) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -45,10 +45,10 @@
 
   .btn-amber {
     background: var(--amber);
-    color: #08090A;
+    color: #17181A;
     transition: transform .15s ease, box-shadow .2s ease;
   }
-  .btn-amber:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -8px rgba(201,148,74,0.45); }
+  .btn-amber:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -8px rgba(255,255,255,0.18); }
 
   .tag {
     font-family: 'JetBrains Mono', monospace;
@@ -69,6 +69,19 @@
     border-color: var(--amber-dim);
   }
 
+  .moscow-clock {
+    font-family: 'JetBrains Mono', monospace;
+    border-left: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .moscow-clock__time { color: var(--text); font-size: .85rem; letter-spacing: .03em; }
+  .service-price {
+    border: 1px solid var(--amber-dim);
+    background: rgba(255,255,255,.06);
+  }
+  .service-price--user { border-color: var(--border); background: transparent; color: var(--text-dim); }
+  .price-label { display: block; margin-bottom: .18rem; font-size: .58rem; line-height: 1; letter-spacing: .08em; text-transform: uppercase; }
+
   a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -79,10 +92,10 @@
 <body class="bg-noise antialiased">
 
 <!-- Header -->
-<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#08090A]/85 border-b border-[var(--border)]">
+<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#17181A]/85 border-b border-[var(--border)]">
   <div class="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
     <div class="flex items-center gap-2.5 shrink-0">
-      <div class="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-sm" style="background: var(--amber); color: #08090A;">&lt;/&gt;</div>
+      <div class="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-sm" style="background: var(--amber); color: #17181A;">&lt;/&gt;</div>
       <span class="font-display font-semibold text-sm tracking-wide">codvib</span>
     </div>
     <nav class="hidden md:flex items-center gap-7 text-sm font-mono text-[var(--text-dim)]">
@@ -92,6 +105,10 @@
       <a href="#contact" class="hover:text-[var(--amber)] transition-colors" data-i18n="nav_contact">контакты</a>
     </nav>
     <div class="flex items-center gap-3 shrink-0">
+      <div class="moscow-clock hidden sm:flex items-center gap-2.5 pl-3 text-[11px] leading-tight whitespace-nowrap">
+        <span class="flex flex-col"><span class="moscow-clock__time font-medium" id="clock-time">--:--</span><span class="moscow-clock__time font-medium" id="clock-date">—</span></span>
+        <span class="uppercase tracking-wider" style="color: var(--teal);" data-i18n="clock_label_short">Москва</span>
+      </div>
       <div class="flex items-center gap-1">
         <button class="lang-btn px-2 py-1 rounded" data-lang="ru">RU</button>
         <button class="lang-btn px-2 py-1 rounded" data-lang="en">EN</button>
@@ -106,7 +123,7 @@
 
   <!-- Hero -->
   <section class="mb-24 relative">
-    <div class="absolute top-10 left-1/4 w-72 h-72 rounded-full blur-[110px] -z-10" style="background: rgba(201,148,74,0.08);"></div>
+    <div class="absolute top-10 left-1/4 w-72 h-72 rounded-full blur-[110px] -z-10" style="background: rgba(255,255,255,0.06);"></div>
 
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] font-mono text-xs mb-6" style="color: var(--teal);">
       <span class="w-1.5 h-1.5 rounded-full" style="background: var(--teal);"></span>
@@ -244,24 +261,24 @@
     <div class="space-y-4">
       <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h3 class="font-display font-bold mb-1" data-i18n="serv1_title">Продающий лендинг</h3>
-          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv1_desc">Одностраничный сайт под ваш продукт: от идеи до готового кода за пару дней.</p>
+          <div class="flex flex-wrap items-center gap-2 mb-1"><h3 class="font-display font-bold" data-i18n="serv1_title">Продающий лендинг</h3><span class="tag px-2 py-1 rounded" style="color: var(--teal);" data-i18n="for_companies">для компаний</span></div>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv1_desc">Лендинг, который представляет продукт и ведёт посетителя к заявке: структура, адаптивная вёрстка и готовый код.</p>
         </div>
-        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 3 000 ₽</span>
+        <div class="flex flex-wrap gap-2"><span class="service-price service-price--user font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap"><span class="price-label" data-i18n="price_user">для пользователей</span>от 3 000 ₽</span><span class="service-price font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style="color: var(--amber);"><span class="price-label" data-i18n="price_company">для компаний</span>от 30 000 ₽</span></div>
       </div>
       <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h3 class="font-display font-bold mb-1" data-i18n="serv2_title">Доработка сайта</h3>
-          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv2_desc">Редизайн, правки вёрстки, новые блоки на существующем сайте.</p>
+          <div class="flex flex-wrap items-center gap-2 mb-1"><h3 class="font-display font-bold" data-i18n="serv2_title">Доработка сайта</h3><span class="tag px-2 py-1 rounded" style="color: var(--teal);" data-i18n="for_companies">для компаний</span></div>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv2_desc">Обновлю существующий сайт: улучшу интерфейс, добавлю нужные разделы и аккуратно встрою новые функции.</p>
         </div>
-        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 2 000 ₽</span>
+        <div class="flex flex-wrap gap-2"><span class="service-price service-price--user font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap"><span class="price-label" data-i18n="price_user">для пользователей</span>от 2 000 ₽</span><span class="service-price font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style="color: var(--amber);"><span class="price-label" data-i18n="price_company">для компаний</span>от 20 000 ₽</span></div>
       </div>
       <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h3 class="font-display font-bold mb-1" data-i18n="serv3_title">Интерактивное веб-приложение</h3>
-          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv3_desc">Интерфейс с состояниями и логикой: формы, трекеры, личные кабинеты.</p>
+          <p class="text-[var(--text-dim)] text-sm" data-i18n="serv3_desc">Полноценный интерфейс с логикой, состояниями и удобными сценариями: от личного кабинета до внутреннего сервиса.</p>
         </div>
-        <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 6 000 ₽</span>
+        <div class="flex flex-wrap gap-2"><span class="service-price service-price--user font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap"><span class="price-label" data-i18n="price_user">для пользователей</span>от 6 000 ₽</span><span class="service-price font-mono text-sm font-semibold px-3 py-2 rounded-lg whitespace-nowrap" style="color: var(--amber);"><span class="price-label" data-i18n="price_company">для компаний</span>от 40 000 ₽</span></div>
       </div>
       <div class="card p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
@@ -278,6 +295,7 @@
         <span class="font-mono text-sm whitespace-nowrap" style="color: var(--amber);">от 4 000 ₽</span>
       </div>
     </div>
+    <p class="mt-5 ml-1 font-mono text-xs text-[var(--text-dim)]" data-i18n="services_note">* Финальная стоимость зависит от объёма задач и согласуется до начала работы.</p>
   </section>
 
   <!-- About -->
@@ -287,15 +305,6 @@
       <p class="text-[var(--text-dim)] text-sm sm:text-base leading-relaxed max-w-2xl" data-i18n="about_text">
         Начал заниматься веб-разработкой недавно, но подхожу к делу серьёзно: слежу за деталями, довожу интерфейсы до рабочего состояния, а не до уровня статичного макета, и честно оцениваю сроки — даже когда осваиваю что-то новое впервые. Открыт к удалённым проектам.
       </p>
-    </div>
-  </section>
-
-  <!-- Clock widget -->
-  <section class="mb-24">
-    <div class="card p-6 rounded-2xl inline-flex flex-col gap-1 min-w-[220px]">
-      <p class="font-mono text-xs" style="color: var(--teal);" data-i18n="clock_label">Время в Москве</p>
-      <p class="font-display font-bold text-2xl" id="clock-time">--:--:--</p>
-      <p class="text-[var(--text-dim)] text-sm" id="clock-date">—</p>
     </div>
   </section>
 
@@ -338,7 +347,7 @@
       skill1_title: "Фронтенд", skill1_desc: "Адаптивная вёрстка, интерактивные интерфейсы, вёрстка по готовому макету.",
       skill2_title: "Форматы", skill2_desc: "От одностраничных лендингов до многоэкранных интерфейсов с состояниями.",
       skill3_title: "Подход", skill3_desc: "Разработка в связке с AI-инструментами для быстрого и аккуратного результата.",
-      services_heading: "Услуги", services_sub: "Что можно заказать уже сейчас.",
+      services_heading: "Услуги", services_sub: "Что можно заказать уже сейчас.", services_note: "* Финальная стоимость зависит от объёма задач и согласуется до начала работы.",
       serv1_title: "Продающий лендинг", serv1_desc: "Одностраничный сайт под ваш продукт: от идеи до готового кода за пару дней.",
       serv2_title: "Доработка сайта", serv2_desc: "Редизайн, правки вёрстки, новые блоки на существующем сайте.",
       serv3_title: "Интерактивное веб-приложение", serv3_desc: "Интерфейс с состояниями и логикой: формы, трекеры, личные кабинеты.",
@@ -346,7 +355,7 @@
       serv5_title: "Discord-боты", serv5_desc: "Боты для модерации, ролей и мини-функций сервера под ваши задачи.",
       about_label: "## обо мне",
       about_text: "Начал заниматься веб-разработкой недавно, но подхожу к делу серьёзно: слежу за деталями, довожу интерфейсы до рабочего состояния, а не до уровня статичного макета, и честно оцениваю сроки — даже когда осваиваю что-то новое впервые. Открыт к удалённым проектам.",
-      clock_label: "Время в Москве",
+      clock_label_short: "Москва", for_companies: "для компаний", price_user: "для пользователей", price_company: "для компаний",
       contact_heading: "Контакты", contact_email_label: "почта", contact_btn: "Написать в Telegram",
       footer_text: "© 2026 codvib. Портфолио сделано на HTML, Tailwind CSS и JavaScript."
     },
@@ -367,15 +376,15 @@
       skill1_title: "Frontend", skill1_desc: "Responsive layouts, interactive interfaces, pixel-accurate implementation from a mockup.",
       skill2_title: "Formats", skill2_desc: "From single-page landers to multi-screen interfaces with real state.",
       skill3_title: "Approach", skill3_desc: "AI-assisted development for a fast, polished result.",
-      services_heading: "Services", services_sub: "What you can order right now.",
-      serv1_title: "Landing page", serv1_desc: "A single-page site for your product: from idea to working code in a couple of days.",
-      serv2_title: "Site revamp", serv2_desc: "Redesign, layout fixes, new blocks on an existing site.",
-      serv3_title: "Interactive web app", serv3_desc: "A stateful interface with real logic: forms, trackers, personal accounts.",
+      services_heading: "Services", services_sub: "What you can order right now.", services_note: "* The final price depends on the scope and is agreed before work begins.",
+      serv1_title: "Sales landing page", serv1_desc: "A conversion-focused product page with clear structure, responsive layout, and ready-to-use code.",
+      serv2_title: "Website improvements", serv2_desc: "I will refresh an existing website: improve the interface, add the needed sections, and integrate new features neatly.",
+      serv3_title: "Interactive web app", serv3_desc: "A complete interface with logic, states, and convenient user flows — from personal accounts to internal tools.",
       serv4_title: "Telegram bots", serv4_desc: "Simple bots for communities and businesses: lead capture, broadcasts, basic dialog logic.",
       serv5_title: "Discord bots", serv5_desc: "Bots for moderation, roles, and small server utilities tailored to your needs.",
       about_label: "## about me",
       about_text: "I started in web development recently, but I take it seriously: I pay attention to detail, finish interfaces to a working state rather than a static mockup, and give honest timelines — even when I'm learning something new. Open to remote projects.",
-      clock_label: "Time in Moscow",
+      clock_label_short: "Moscow", for_companies: "for companies", price_user: "for individuals", price_company: "for companies",
       contact_heading: "Contact", contact_email_label: "email", contact_btn: "Message on Telegram",
       footer_text: "© 2026 codvib. Portfolio built with HTML, Tailwind CSS and JavaScript."
     },
@@ -396,15 +405,15 @@
       skill1_title: "Фронтенд", skill1_desc: "Адаптивна верстка, інтерактивні інтерфейси, верстка за готовим макетом.",
       skill2_title: "Формати", skill2_desc: "Від односторінкових лендінгів до багатоекранних інтерфейсів зі станами.",
       skill3_title: "Підхід", skill3_desc: "Розробка у зв'язці з AI-інструментами для швидкого й акуратного результату.",
-      services_heading: "Послуги", services_sub: "Що можна замовити вже зараз.",
-      serv1_title: "Продавальний лендінг", serv1_desc: "Односторінковий сайт під ваш продукт: від ідеї до готового коду за пару днів.",
-      serv2_title: "Доопрацювання сайту", serv2_desc: "Редизайн, правки верстки, нові блоки на наявному сайті.",
-      serv3_title: "Інтерактивний веб-застосунок", serv3_desc: "Інтерфейс зі станами і логікою: форми, трекери, особисті кабінети.",
+      services_heading: "Послуги", services_sub: "Що можна замовити вже зараз.", services_note: "* Остаточна вартість залежить від обсягу задач і узгоджується до початку роботи.",
+      serv1_title: "Продавальний лендінг", serv1_desc: "Сторінка для продукту, що веде відвідувача до заявки: структура, адаптивна верстка та готовий код.",
+      serv2_title: "Доопрацювання сайту", serv2_desc: "Оновлю наявний сайт: покращу інтерфейс, додам потрібні розділи й акуратно інтегрую нові функції.",
+      serv3_title: "Інтерактивний вебзастосунок", serv3_desc: "Повноцінний інтерфейс із логікою, станами та зручними сценаріями: від особистого кабінету до внутрішнього сервісу.",
       serv4_title: "Telegram-боти", serv4_desc: "Прості боти для спільнот і бізнесу: приймання заявок, розсилки, базова логіка діалогу.",
       serv5_title: "Discord-боти", serv5_desc: "Боти для модерації, ролей та міні-функцій сервера під ваші задачі.",
       about_label: "## про мене",
       about_text: "Почав займатися веброзробкою нещодавно, але підходжу до справи серйозно: стежу за деталями, доводжу інтерфейси до робочого стану, а не до рівня статичного макета, і чесно оцінюю терміни — навіть коли освоюю щось нове вперше. Відкритий до віддалених проєктів.",
-      clock_label: "Час у Москві",
+      clock_label_short: "Москва", for_companies: "для компаній", price_user: "для користувачів", price_company: "для компаній",
       contact_heading: "Контакти", contact_email_label: "пошта", contact_btn: "Написати в Telegram",
       footer_text: "© 2026 codvib. Портфоліо зроблено на HTML, Tailwind CSS і JavaScript."
     }
@@ -436,10 +445,10 @@
     const locale = localeMap[lang] || 'ru-RU';
     const now = new Date();
     const timeFmt = new Intl.DateTimeFormat(locale, {
-      timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit', hour12: false
     });
     const dateFmt = new Intl.DateTimeFormat(locale, {
-      timeZone: 'Europe/Moscow', weekday: 'long', day: 'numeric', month: 'long'
+      timeZone: 'Europe/Moscow', day: '2-digit', month: '2-digit'
     });
     document.getElementById('clock-time').textContent = timeFmt.format(now);
     document.getElementById('clock-date').textContent = dateFmt.format(now);
