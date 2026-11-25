@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save30 — Начни экономить за 30 дней</title>
+    <meta name="description" content="Save30 — игровой трекер финансов, который помогает избавиться от импульсивных трат, отменить ненужные подписки и накопить деньги за 30-дневный спринт.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            dark: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 0%, #d1fae5 0%, #f8fafc 70%);
+        }
+    </style>
+<style id="save30-redesign">
+:root{--s30-ink:#14231f;--s30-green:#087f5b;--s30-line:#dce7e1}html{scroll-behavior:smooth}body{overflow-x:hidden}.save30-journey{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px clamp(16px,4vw,42px);background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--s30-line);box-shadow:0 8px 30px #13251c0a}.journey-brand{display:flex;align-items:center;gap:10px;color:#15251f!important;font-weight:900;text-decoration:none;white-space:nowrap}.journey-brand:first-letter{color:#07966a}.journey-brand span{font-size:11px;color:#84918b;font-weight:600}.journey-links{display:flex;gap:7px;overflow:auto}.journey-links a{white-space:nowrap;text-decoration:none;color:#697771;font-size:11px;font-weight:700;padding:8px 10px;border-radius:999px;transition:.25s}.journey-links a:hover,.journey-links a.active{background:#e8f5ef;color:#087f5b;transform:translateY(-2px)}.reveal-ready{opacity:0;transform:translateY(24px) scale(.99);filter:blur(3px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1),filter .75s}.reveal-ready.is-visible{opacity:1;transform:none;filter:none}.reveal-ready:nth-child(3n+2){transition-delay:.08s}.reveal-ready:nth-child(3n){transition-delay:.15s}button,a,[role=button]{transition-timing-function:cubic-bezier(.2,.7,.2,1)}button:hover:not(:disabled),[role=button]:hover{transform:translateY(-2px)}@media(max-width:700px){.save30-journey{align-items:flex-start;flex-direction:column;gap:8px;padding:10px 14px}.journey-links{width:100%;padding-bottom:2px}.journey-links a{font-size:10px;padding:7px 9px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal-ready{opacity:1;transform:none;filter:none;transition:none}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style></head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30">
+                    S30
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">Save<span class="text-brand-500">30</span></span>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-brand-600 transition">Как это работает</a>
+                <a href="#calculator" class="hover:text-brand-600 transition">Калькулятор</a>
+                <a href="#features" class="hover:text-brand-600 transition">Возможности</a>
+                <a href="#reviews" class="hover:text-brand-600 transition">Отзывы</a>
+            </nav>
+
+            <a href="#download" class="bg-slate-900 hover:bg-brand-600 text-white font-medium px-5 py-2.5 rounded-full text-sm transition-all duration-300 shadow-md hover:shadow-brand-500/20">
+                Скачать бесплатно
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-32 hero-gradient overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Column: Copy & CTA -->
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+                    <span>✨</span> Спринт, который изменит твои привычки
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+                    Начни экономить <br class="hidden sm:inline">без жестких ограничений. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-400">За 30 дней.</span>
+                </h1>
+
+                <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+                    Игровой трекер финансов, который помогает избавиться от импульсивных трат, отменить ненужные подписки и отложить деньги на то, что реально важно.
+                </p>
+
+                <!-- App Store Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#" class="flex items-center gap-3 bg-slate-900 text-white px-6 py-3.5 rounded-2xl hover:bg-slate-800 transition shadow-xl shadow-slate-900/10">
+                        <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.61.71-1.14 1.86-1 2.98 1.08.08 2.16-.58 2.81-1.38z"/></svg>
+                        <div class="text-left">
+                            <div class="text-[10px] uppercase font-semibold text-slate-400">Загрузите в</div>
+                            <div class="text-sm font-bold -mt-1">App Store</div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-3 bg-white text-slate-900 border border-slate-200 px-6 py-3.5 rounded-2xl hover:bg-slate-50 transition shadow-sm">
+                        <svg class="w-6 h-6 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.5 1.5 0 0 1-.61-1.207V3.02a1.5 1.5 0 0 1 .609-1.207zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.664-3.664l2.937 1.697a1.5 1.5 0 0 1 0 2.52l-2.937 1.697L15.61 12l2.553-2.957zM5.864 2.658l10.937 6.333-2.302 2.302-8.635-8.635z"/></svg>
+                        <div class="text-left">
+                            <div class="text-[10px] uppercase font-semibold text-slate-400">Доступно в</div>
+                            <div class="text-sm font-bold -mt-1">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Rating Proof -->
+                <div class="flex items-center gap-4 pt-4 border-t border-slate-200/60">
+                    <div class="flex -space-x-2">
+                        <img class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Участница спринта Save30">
+                        <img class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Участник спринта Save30">
+                        <img class="w-9 h-9 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Участница спринта Save30">
+                    </div>
+                    <div>
+                        <div class="flex items-center text-amber-400 text-sm">
+                            ★ ★ ★ ★ ★ <span class="text-slate-900 font-bold ml-1.5 text-sm">4.9</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Уже более 50,000+ участников спринта</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Phone UI Mockup -->
+            <div class="relative flex justify-center">
+                <!-- Soft Glow Behind Phone -->
+                <div class="absolute w-72 h-72 bg-brand-500/20 rounded-full blur-3xl -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                
+                <!-- Phone Frame -->
+                <div class="w-[280px] sm:w-[310px] bg-slate-900 rounded-[48px] p-4 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900/50">
+                    <!-- Notch -->
+                    <div class="w-32 h-5 bg-slate-900 rounded-b-2xl mx-auto mb-3 flex justify-center items-center">
+                        <div class="w-12 h-1.5 bg-slate-800 rounded-full"></div>
+                    </div>
+
+                    <!-- Screen Content -->
+                    <div class="bg-slate-50 rounded-[36px] p-5 space-y-4 text-left">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-[10px] text-slate-400 uppercase font-semibold">Ваш спринт</div>
+                                <div class="text-base font-bold text-slate-900">День 18 из 30</div>
+                            </div>
+                            <span class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs">🔥 18</span>
+                        </div>
+
+                        <!-- Progress Card -->
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                            <div class="text-xs text-slate-500 mb-1">Сэкономлено за спринт</div>
+                            <div class="text-2xl font-extrabold text-brand-600">+14 200 ₽</div>
+                            
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-slate-100 h-2.5 rounded-full mt-3 overflow-hidden">
+                                <div class="bg-brand-500 h-full rounded-full w-[60%]"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Старт: 0 ₽</span>
+                                <span>Цель: 20 000 ₽</span>
+                            </div>
+                        </div>
+
+                        <!-- Daily Task Widget -->
+                        <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-4 rounded-2xl space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] bg-brand-500/20 text-brand-400 px-2 py-0.5 rounded-md font-medium">Задание дня</span>
+                                <span class="text-xs text-slate-400">2 мин</span>
+                            </div>
+                            <div class="text-xs font-semibold">Проверь подписки на кино и музыку</div>
+                            <button class="w-full bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold py-2 rounded-xl transition">
+                                Выполнить и +350 ₽
+                            </button>
+                        </div>
+
+                        <!-- Mini Stats -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-white p-3 rounded-xl border border-slate-100 text-center">
+                                <div class="text-[10px] text-slate-400">Остановок импульса</div>
+                                <div class="text-sm font-bold text-slate-800">4 покупки</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-slate-100 text-center">
+                                <div class="text-[10px] text-slate-400">Награда</div>
+                                <div class="text-sm font-bold text-amber-500">🏆 Уровень 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PAIN VS SOLUTION SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Почему обычный учёт финансов не работает?</h2>
+                <p class="text-slate-600 mt-3">Мы убрали всё, что раздражает в традиционном бюджетировании, и оставили только то, что даёт результат.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Pain Card -->
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/60 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-xl">❌</div>
+                    <h3 class="text-xl font-bold text-slate-900">Как было раньше</h3>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-500 font-bold">•</span> Скучные таблицы Excel, которые забрасываешь через 3 дня
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-500 font-bold">•</span> Чувство вины за каждую покупку кофе или встречи с друзьями
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-500 font-bold">•</span> В конце месяца не понятно, куда слилась треть зарплаты
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution Card -->
+                <div class="p-8 rounded-3xl bg-gradient-to-br from-brand-50 to-emerald-50 border border-brand-200 space-y-4 relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-brand-500/30">✅</div>
+                    <h3 class="text-xl font-bold text-slate-900">С приложением Save30</h3>
+                    <ul class="space-y-3 text-slate-700 text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-600 font-bold">•</span> <span><strong>Игровой спринт:</strong> всего 2 минуты в день, понятные цели и задания</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-600 font-bold">•</span> <span><strong>Никаких жестких диет:</strong> ты не отказываешься от удовольствий, а убираешь лишнее</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-600 font-bold">•</span> <span><strong>Закрепленный результат:</strong> новая привычка сохраняется на всю жизнь</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CALCULATOR SECTION -->
+    <section id="calculator" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center space-y-4 mb-12">
+                <span class="text-brand-400 font-semibold text-xs tracking-widest uppercase">Интерактивный расчёт</span>
+                <h2 class="text-3xl sm:text-4xl font-bold">Сколько ты сохранишь за 30 дней?</h2>
+                <p class="text-slate-400">Передвигай ползунок и посмотри, как мелкие незаметные траты превращаются в существенный капитал.</p>
+            </div>
+
+            <div class="bg-slate-800/80 backdrop-blur border border-slate-700/60 p-8 sm:p-10 rounded-3xl space-y-8 shadow-2xl">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="text-sm font-medium text-slate-300">Мелкие ежедневные траты (кофе, перекусы, такси, импульсы)</label>
+                        <span id="dailySpendValue" class="text-xl font-bold text-brand-400">350 ₽ / день</span>
+                    </div>
+                    <input type="range" id="dailySpend" min="100" max="2000" step="50" value="350" 
+                           class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-500">
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6 pt-6 border-t border-slate-700/60 text-center">
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400 mb-1">Сбережения за 30 дней</div>
+                        <div id="monthlySaved" class="text-3xl sm:text-4xl font-extrabold text-brand-400">10 500 ₽</div>
+                    </div>
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-700/40">
+                        <div class="text-xs text-slate-400 mb-1">За 1 год (с умным трекером)</div>
+                        <div id="yearlySaved" class="text-3xl sm:text-4xl font-extrabold text-emerald-300">126 000 ₽</div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <a href="#download" class="inline-block bg-brand-500 hover:bg-brand-600 text-white font-semibold px-8 py-3.5 rounded-full transition shadow-lg shadow-brand-500/20">
+                        Запустить свой 30-дневный спринт
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES BENTO GRID -->
+    <section id="features" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Инструменты, которые помогут накопить</h2>
+                <p class="text-slate-600 mt-3">Уникальные функции, разработанные с учетом поведенческой психологии.</p>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <!-- Card 1 (Large) -->
+                <div class="md:col-span-2 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl">⏳</div>
+                        <h3 class="text-xl font-bold text-slate-900">Функция «Пауза на импульс»</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed max-w-md">
+                            Хочешь купить очередную ненужную вещь? Добавь её в списки приложения. Включится 24-часовой таймер. В 70% случаев после «охлаждения» желание покупать проходит.
+                        </p>
+                    </div>
+                    <div class="mt-8 bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500">Заблокировано ненужных покупок:</span>
+                        <span class="text-sm font-bold text-brand-600">+4 800 ₽ сэкономлено</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl">🔍</div>
+                        <h3 class="text-xl font-bold text-slate-900">Детектор подписок</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Приложение находит забытые сервисы, за которые уходят деньги, и помогает отменить их в 1 клик.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl">🎯</div>
+                        <h3 class="text-xl font-bold text-slate-900">Микро-цели</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Не абстрактный миллион, а конкретная цель на 30 дней: новый гаджет, курс или билеты на концерт.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 (Medium) -->
+                <div class="md:col-span-2 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">🏆</div>
+                        <h3 class="text-xl font-bold text-slate-900">Геймификация и бейджи</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed max-w-md">
+                            Проходи каждый день как уровень в игре. Получай виртуальные награды и следи за своим рейтингом среди других участников спринта.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Отзывы участников</h2>
+                <p class="text-slate-600 mt-3">Те, кто уже прошел свой 30-дневный спринт и изменил финансовые привычки.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/60 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Фото Алены С., пользователя Save30">
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Алена С.</div>
+                            <div class="text-xs text-brand-600 font-semibold">Сэкономлено: 18 500 ₽</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        «Всегда думала, что экономить — это жить впроголодь. В итоге за 30 дней просто отменила 3 ненужные подписки и перестала покупать еду на эмоциях. Очень затягивает!»
+                    </p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/60 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Фото Максима К., пользователя Save30">
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Максим К.</div>
+                            <div class="text-xs text-brand-600 font-semibold">Сэкономлено: 24 000 ₽</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        «Функция "Пауза на импульс" — просто гениальна. Спас свой бюджет от покупки третьего худи и кучи ненужных гаджетов на маркетплейсах.»
+                    </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/60 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Фото Екатерины М., пользователя Save30">
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Екатерина М.</div>
+                            <div class="text-xs text-brand-600 font-semibold">Сэкономлено: 9 800 ₽</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        «Очень приятный интерфейс, мягкие цвета, ничего не бесит и не давит. 2 минуты в день — и ты реально контролируешь свои деньги.»
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FOOTER SECTION -->
+    <section id="download" class="py-20 bg-gradient-to-br from-brand-600 to-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold">Готов накопить свою первую сумму уже в этом месяце?</h2>
+            <p class="text-brand-100 text-lg max-w-xl mx-auto">
+                Первые 7 дней спринта совершенно бесплатно. Без привязки карты.
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
+                <a href="#" class="bg-white text-slate-900 font-bold px-8 py-4 rounded-2xl hover:bg-brand-50 transition shadow-xl">
+                    Скачать для iOS
+                </a>
+                <a href="#" class="bg-slate-800/80 border border-slate-600 text-white font-bold px-8 py-4 rounded-2xl hover:bg-slate-800 transition">
+                    Скачать для Android
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 bg-slate-900 text-slate-400 border-t border-slate-800 text-xs">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © 2026 Save30 Inc. Все права защищены.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition">Конфиденциальность</a>
+                <a href="#" class="hover:text-white transition">Условия использования</a>
+                <a href="#" class="hover:text-white transition">Поддержка</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CALCULATOR JAVASCRIPT LOGIC -->
+    <script>
+        const slider = document.getElementById('dailySpend');
+        const spendValue = document.getElementById('dailySpendValue');
+        const monthlySaved = document.getElementById('monthlySaved');
+        const yearlySaved = document.getElementById('yearlySaved');
+
+        function updateCalculator() {
+            const val = parseInt(slider.value);
+            spendValue.innerText = `${val.toLocaleString()} ₽ / день`;
+            
+            const monthTotal = val * 30;
+            const yearTotal = monthTotal * 12;
+
+            monthlySaved.innerText = `${monthTotal.toLocaleString()} ₽`;
+            yearlySaved.innerText = `${yearTotal.toLocaleString()} ₽`;
+        }
+
+        slider.addEventListener('input', updateCalculator);
+    </script>
+<div class="save30-journey"><a class="journey-brand" href="save30-landing.html">S30 <span>Save30 ecosystem</span></a><div class="journey-links"><a href="save30-landing.html" class="active">01 · Лендинг</a><a href="save30-webapp.html" class="">02 · Трекер</a><a href="save30-insights.html" class="">03 · Аналитика</a><a href="save30-store.html" class="">04 · Магазин</a><a href="save30-ai-saas.html" class="">05 · AI-план</a></div></div><script id="save30-motion">(()=>{const items=[...document.querySelectorAll('main section,main article,main .grid>*,main .grid,main>div:not(.save30-journey),main h1,main h2,main>p')];items.forEach((el,i)=>{if(el.closest('.save30-journey'))return;el.classList.add('reveal-ready');el.style.transitionDelay=Math.min(i%5,4)*65+'ms'});const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});items.forEach(el=>io.observe(el))})();</script></body>
+</html>
