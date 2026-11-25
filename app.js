@@ -27,7 +27,7 @@ ua:{nh:'Головна',na:'Про мене',nw:'Портфоліо',st:'віл�
 hh:'Привіт. Я — frontend-розробник, який робить швидко і по суті.',
 hp:'Створюю лендінги та веб-інтерфейси у зв’язці з сучасними AI-інструментами — чистий код і продуманий результат у короткі терміни. Вчуся щодня і люблю доводити проєкт до стану «можна показувати».',
 cw:'Дивитись портфоліо',ca:'Про мене',
-ah:'Про мене',ap1:'Frontend-розробник із Москви. Створюю лендінги та веб-інтерфейси у зв’язці з сучасними AI-інструментами — чистий код і продуманий результат у короткі терміни.',
+ah:'Про мене',ap1:'Frontend-розробник. Створюю лендінги та веб-інтерфейси у зв’язці з сучасними AI-інструментами — чистий код і продуманий результат у короткі терміни.',
 ap2:'Почав займатися веброзробкою нещодавно, але підходжу до справи серйозно: стежу за деталями, доводжу інтерфейси до робочого стану, а не до рівня статичного макета, і чесно оцінюю терміни. Відкритий до віддалених проєктів.',
 sh:'Навички',s1:'Фронтенд',s1d:'Адаптивна верстка, інтерактивні інтерфейси, верстка за макетом. HTML5, CSS3, Tailwind, JavaScript.',
 s2:'Формати',s2d:'Лендінги, SPA, багатоекранні інтерфейси зі станами.',s3:'Підхід',s3d:'Розробка з AI-інструментами, WordPress.',
@@ -35,8 +35,16 @@ wh:'Один продукт — п’ять пов’язаних сценарі
 vh:'Чим можу допомогти',v1:'Сайт під задачу',v1d:'Продумана структура, адаптивний інтерфейс і зрозумілий шлях до заявки.',v2:'Розвиток продукту',v2d:'Нові сторінки, функції та дбайливе доопрацювання наявного інтерфейсу.',
 v3:'Інтерактивні сервіси',v3d:'Робочі сценарії зі станами, формами та зворотним зв’язком для користувача.',
 ch:'Контакти',rt:'Відгуки замовників',rb:'Відкрити в Telegram',rc:'Скопіювати посилання',rk:'Скопійовано',ft:'© 2026 codvib'}};
+Object.assign(T.ru,{g1:'01 · Продуктовый лендинг',g2:'02 · Веб-приложение',g3:'03 · Финансовая аналитика',g4:'04 · Умный магазин',g5:'05 · Платформа по подписке',
+d1:'Представляет идею 30-дневного финансового спринта и вовлекает в первый шаг.',d2:'Ежедневные привычки, прогресс спринта и пауза перед импульсивной покупкой.',d3:'Обзор доходов, расходов, сбережений и динамики бюджета в одном дашборде.',d4:'Каталог, который учитывает свободный бюджет и предлагает отложить покупку.',d5:'Сценарный помощник, симулятор накоплений и тарифы подписки.',go:'Открыть проект →',pn:'Стоимость обсуждается после оценки задачи и согласуется до начала работы.'});
+Object.assign(T.en,{g1:'01 · Product landing page',g2:'02 · Web app',g3:'03 · Financial analytics',g4:'04 · Smart store',g5:'05 · Subscription platform',
+d1:'Presents the 30-day financial sprint idea and gets visitors to the first step.',d2:'Daily habits, sprint progress and a pause before an impulse purchase.',d3:'Income, expenses, savings and budget trends in a single dashboard.',d4:'A catalog that accounts for your free budget and suggests postponing a purchase.',d5:'A rule-based assistant, a savings simulator and subscription plans.',go:'Open project →',pn:'The price is discussed after the task is assessed and agreed before work begins.'});
+Object.assign(T.ua,{g1:'01 · Продуктовий лендінг',g2:'02 · Вебзастосунок',g3:'03 · Фінансова аналітика',g4:'04 · Розумний магазин',g5:'05 · Платформа за підпискою',
+d1:'Представляє ідею 30-денного фінансового спринту й залучає до першого кроку.',d2:'Щоденні звички, прогрес спринту та пауза перед імпульсивною покупкою.',d3:'Огляд доходів, витрат, заощаджень і динаміки бюджету в одному дашборді.',d4:'Каталог, що враховує вільний бюджет і пропонує відкласти покупку.',d5:'Сценарний помічник, симулятор накопичень і тарифи підписки.',go:'Відкрити проєкт →',pn:'Вартість обговорюється після оцінки задачі й узгоджується до початку роботи.'});
 const q=new URLSearchParams(location.search).get('lang');
-let L=T[q]?q:(localStorage.lang&&T[localStorage.lang]?localStorage.lang:'ru');
+let sv='';try{sv=localStorage.lang}catch(e){}
+let L=T[q]?q:(T[sv]?sv:'ru');
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const pg=document.body.dataset.p,CH='<>/{}[]=+*#$%&01';
 const nav=`<nav class="w"><a class="logo" href="index.html">&lt;/&gt; codvib</a>
 <a href="index.html" data-t="nh" class="${pg=='home'?'on':''}"></a><a href="about.html" data-t="na" class="${pg=='about'?'on':''}"></a><a href="portfolio.html" data-t="nw" class="${pg=='work'?'on':''}"></a>
@@ -45,11 +53,11 @@ const foot=`<footer class="w"><h2 data-t="ch" data-s></h2><div class="cl"><a hre
 <div class="rev"><div><div data-t="rt"></div><code>t.me/repcodvib</code></div><div><a class="btn" href="https://t.me/repcodvib" data-t="rb"></a><button class="btn" id="cp" data-t="rc"></button></div></div>
 <p style="margin-top:24px" data-t="ft"></p></footer>`;
 document.body.insertAdjacentHTML('afterbegin',nav);document.body.insertAdjacentHTML('beforeend',foot);
-function scr(el){const t=el.textContent;el.setAttribute('aria-label',t);el.textContent='';
+function scr(el){if(RM)return;const t=el.textContent;el.setAttribute('aria-label',t);el.textContent='';
 const sp=[...t].map(c=>{const s=document.createElement('span');s.setAttribute('aria-hidden','true');el.appendChild(s);return{s,c,r:Math.random()*10+4}});
 let k=0;const id=setInterval(()=>{k++;let d=1;sp.forEach((o,j)=>{const at=j*.5+o.r;if(o.c==' '||k>=at){o.s.textContent=o.c;o.s.className=''}else{d=0;o.s.textContent=CH[Math.random()*CH.length|0];o.s.className='sym'}});if(d)clearInterval(id)},35)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-s]').forEach(scr);io.unobserve(e.target)}}),{threshold:.15});
-function render(a){document.querySelectorAll('[data-t]').forEach(e=>e.textContent=T[L][e.dataset.t]);
+function render(a){document.querySelectorAll('[data-t]').forEach(e=>{e.removeAttribute('aria-label');e.textContent=T[L][e.dataset.t]});
 document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('on',b.dataset.l==L));document.documentElement.lang=L;
 if(a)document.querySelectorAll('[data-s]').forEach(e=>{if(!e.closest('.up'))scr(e)})}
 document.querySelectorAll('.up').forEach(e=>io.observe(e));

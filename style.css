@@ -27,11 +27,11 @@ a.card:hover{border-color:var(--fg);background:#18181c}
 .price-note{margin-top:22px;color:var(--dim);font-size:13px}
 .up{transform:translateY(28px) scale(.985);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .up.in{transform:translateY(0) scale(1)}
-[data-s] span{display:inline-block;animation:text-settle .28s ease both}
-@keyframes text-settle{from{opacity:.45;transform:translateY(5px);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}
+[data-s] span{white-space:pre-wrap}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.up{opacity:1;transform:none}}
 footer{margin:80px 0 40px;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
 .cl{display:flex;gap:10px 24px;flex-wrap:wrap;margin:12px 0 24px}
 .cl a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
 .rev{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--line);background:#101012;padding:14px 16px}
 .rev code{color:#9a9aa0}
+.lead-copy{margin-bottom:28px}
