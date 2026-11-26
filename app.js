@@ -49,7 +49,7 @@ const pg=document.body.dataset.p,CH='<>/{}[]=+*#$%&01';
 const nav=`<nav class="w"><a class="logo" href="index.html">&lt;/&gt; codvib</a>
 <a href="index.html" data-t="nh" class="${pg=='home'?'on':''}"></a><a href="about.html" data-t="na" class="${pg=='about'?'on':''}"></a><a href="portfolio.html" data-t="nw" class="${pg=='work'?'on':''}"></a>
 <span><button data-l="ru">ru</button> <button data-l="en">en</button></span></nav>`;
-const foot=`<footer class="w"><h2 data-t="ch" data-s></h2><div class="cl up"><a href="https://t.me/codvib">Telegram @codvib</a><a href="https://discordapp.com/users/1534330288463675514">Discord codvib</a><a href="mailto:codvib@proton.me">codvib@proton.me</a></div>
+const foot=`<footer class="w"><h2 data-t="ch" data-s></h2><div class="cl up"><a href="https://t.me/codvib">Telegram @codvib</a><a href="https://max.ru/u/f9LHodD0cOJrY6TaEwLJ0u7fHalmilKBhaGpvauWtaItSEFchWscUtOs51U">MAX</a><a href="mailto:codv1b@tutamail.com">codv1b@tutamail.com</a></div>
 <div class="rev up"><div><div data-t="rt"></div><code>t.me/repcodvib</code></div><div><a class="btn" href="https://t.me/repcodvib" data-t="rb"></a><button class="btn" id="cp" data-t="rc"></button></div></div>
 <p style="margin-top:24px" data-t="ft"></p></footer>`;
 document.body.insertAdjacentHTML('afterbegin',nav);document.body.insertAdjacentHTML('beforeend',foot);

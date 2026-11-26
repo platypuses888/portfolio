@@ -60,3 +60,6 @@ label{display:block;font-size:13px;color:var(--mu);margin:14px 0 6px}
 .foot{margin-top:64px;font-size:13px;color:var(--mu)}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.tx .w,.cell{opacity:1;animation:none!important}.mq span{animation:none}}
 .shop>*,.bento>*{min-width:0}.tiles{grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr))}
+.ph{height:136px}.ph svg{transition:transform .35s cubic-bezier(.2,.8,.2,1)}.it:hover .ph svg{transform:rotate(-6deg) scale(1.1)}
+.tiles>.c{grid-column:auto}
+.shop>.c,.shop>*{grid-column:auto}
