@@ -49,19 +49,20 @@ const pg=document.body.dataset.p,CH='<>/{}[]=+*#$%&01';
 const nav=`<nav class="w"><a class="logo" href="index.html">&lt;/&gt; codvib</a>
 <a href="index.html" data-t="nh" class="${pg=='home'?'on':''}"></a><a href="about.html" data-t="na" class="${pg=='about'?'on':''}"></a><a href="portfolio.html" data-t="nw" class="${pg=='work'?'on':''}"></a>
 <span><button data-l="ru">ru</button> <button data-l="en">en</button></span></nav>`;
-const foot=`<footer class="w"><h2 data-t="ch" data-s></h2><div class="cl"><a href="https://t.me/codvib">Telegram @codvib</a><a href="https://discordapp.com/users/1534330288463675514">Discord codvib</a><a href="mailto:codvib@proton.me">codvib@proton.me</a></div>
-<div class="rev"><div><div data-t="rt"></div><code>t.me/repcodvib</code></div><div><a class="btn" href="https://t.me/repcodvib" data-t="rb"></a><button class="btn" id="cp" data-t="rc"></button></div></div>
+const foot=`<footer class="w"><h2 data-t="ch" data-s></h2><div class="cl up"><a href="https://t.me/codvib">Telegram @codvib</a><a href="https://discordapp.com/users/1534330288463675514">Discord codvib</a><a href="mailto:codvib@proton.me">codvib@proton.me</a></div>
+<div class="rev up"><div><div data-t="rt"></div><code>t.me/repcodvib</code></div><div><a class="btn" href="https://t.me/repcodvib" data-t="rb"></a><button class="btn" id="cp" data-t="rc"></button></div></div>
 <p style="margin-top:24px" data-t="ft"></p></footer>`;
 document.body.insertAdjacentHTML('afterbegin',nav);document.body.insertAdjacentHTML('beforeend',foot);
-function scr(el){if(RM)return;const t=el.textContent;el.setAttribute('aria-label',t);el.textContent='';
-const sp=[...t].map(c=>{const s=document.createElement('span');s.setAttribute('aria-hidden','true');el.appendChild(s);return{s,c,r:Math.random()*10+4}});
-let k=0;const id=setInterval(()=>{k++;let d=1;sp.forEach((o,j)=>{const at=j*.5+o.r;if(o.c==' '||k>=at){o.s.textContent=o.c;o.s.className=''}else{d=0;o.s.textContent=CH[Math.random()*CH.length|0];o.s.className='sym'}});if(d)clearInterval(id)},35)}
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-s]').forEach(scr);io.unobserve(e.target)}}),{threshold:.15});
+function scr(el,st=28,b=0){el.classList.add('rd');if(RM)return;const t=el.textContent;el.setAttribute('aria-label',t);el.textContent='';
+t.split(' ').forEach((w,i,r)=>{const s=document.createElement('span');s.className='wd';s.setAttribute('aria-hidden','true');s.textContent=w;s.style.animationDelay=b+i*st+'ms';el.append(s);if(i<r.length-1)el.append(' ')})}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target,d=[...t.parentNode.children].indexOf(t)*70;t.style.transitionDelay=d+'ms';t.classList.add('in');
+t.querySelectorAll('[data-s]').forEach(x=>scr(x,22,d+140));io.unobserve(t);setTimeout(()=>t.style.transitionDelay='',d+700)}),{threshold:.12});
+const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){scr(e.target);io2.unobserve(e.target)}}),{threshold:.1});
 function render(a){document.querySelectorAll('[data-t]').forEach(e=>{e.removeAttribute('aria-label');e.textContent=T[L][e.dataset.t]});
 document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('on',b.dataset.l==L));document.documentElement.lang=L;
-if(a)document.querySelectorAll('[data-s]').forEach(e=>{if(!e.closest('.up'))scr(e)})}
+if(a)document.querySelectorAll('[data-s]').forEach(e=>{if(!e.closest('.up'))io2.observe(e)})}
 document.querySelectorAll('.up').forEach(e=>io.observe(e));
-document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{L=b.dataset.l;try{localStorage.lang=L}catch(e){}render(0)});
+document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{L=b.dataset.l;try{localStorage.lang=L}catch(e){}render(1)});
 document.getElementById('cp').onclick=async e=>{const b=e.target;try{await navigator.clipboard.writeText('https://t.me/repcodvib')}catch(x){}
 b.textContent=T[L].rk;setTimeout(()=>b.textContent=T[L].rc,1500)};
 render(1);

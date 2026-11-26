@@ -1,25 +1,32 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 Pro</title></head><body><main class="w">
-<p class="k">Save30 Pro</p><h1>Помощник и симулятор для накоплений.</h1><p class="lead">Спросите про свои цифры и посмотрите, во что вырастут регулярные накопления.</p>
-<div class="grid"><div class="box"><h3>Помощник</h3><div class="chat" id="ch"><div class="b">Спросите про накопления за год, про покупку («можно ли купить за 5000?») или про расходы.</div></div>
-<div class="row" style="margin:8px 0"><button class="btn o" onclick="ask('Сколько накоплю за год?')">За год</button><button class="btn o" onclick="ask('Можно ли купить за 5000?')">Покупка</button><button class="btn o" onclick="ask('Куда уходят деньги?')">Расходы</button></div>
-<div class="row"><input id="q" placeholder="Ваш вопрос" style="flex:1;min-width:140px"><button class="btn" onclick="ask()">Спросить</button></div>
-<p class="mu" style="font-size:12px;margin-top:8px">Демо: ответы строятся по правилам из ваших данных в Save30, без подключения нейросети.</p></div>
-<div class="box"><h3>Симулятор капитала</h3><label for="pm">Взнос в месяц</label><input id="pm" type="range" min="1000" max="50000" step="500" value="10000"><label for="rt">Доходность в год, %</label><input id="rt" type="range" min="1" max="20" value="8"><label for="yr">Лет</label><input id="yr" type="range" min="1" max="30" value="10">
-<p class="big g" id="fv" style="margin-top:14px"></p><p class="mu mono" style="font-size:13px" id="sp"></p><svg id="sv" viewBox="0 0 320 110" width="100%"></svg></div></div>
-<h2>Тарифы</h2><div class="row" style="margin-bottom:16px"><button class="btn" id="t1" onclick="tp(0)">Помесячно</button><button class="btn o" id="t2" onclick="tp(1)">За год</button></div>
-<div class="grid" id="pl"></div><div id="pn"></div></main>
+<p class="k tx">Save30 Pro</p><h1 class="tx">Помощник и симулятор капитала</h1>
+<div class="bento"><div class="c s7 rv"><p class="k" style="margin:0">Помощник</p><div class="chat" id="ch"></div>
+<div class="row"><button class="btn o" data-q="Сколько накоплю за год?">За год</button><button class="btn o" data-q="Можно ли купить за 5000?">Покупка</button><button class="btn o" data-q="Куда уходят деньги?">Расходы</button></div>
+<div class="row" style="margin-top:10px;flex-wrap:nowrap"><input id="q" placeholder="Ваш вопрос" aria-label="Ваш вопрос"><button class="btn" id="ask">Спросить</button></div>
+<p class="mu" style="font-size:12px;margin-top:10px">Демо: ответы строятся по правилам из ваших данных в Save30, без подключения нейросети.</p></div>
+<div class="c l s5 rv"><p class="k" style="margin:0">Через <span id="yl"></span></p><p class="big" id="fv" style="font-size:clamp(30px,5vw,52px)"></p><p class="mu" id="sp2" style="font-size:14px"></p>
+<svg viewBox="0 0 300 100" width="100%" aria-hidden="true"><path id="ln" pathLength="1" fill="none" stroke="#0a0d0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" d=""/></svg>
+<label for="pm">Взнос в месяц</label><input id="pm" type="range" min="1000" max="50000" step="500" value="10000"><label for="rt">Доходность в год, %</label><input id="rt" type="range" min="1" max="20" value="8"><label for="yr">Лет</label><input id="yr" type="range" min="1" max="30" value="10"></div></div>
+<h2 class="tx">Тарифы</h2><div class="row rv"><button class="btn" id="t1">Помесячно</button><button class="btn o" id="t2">За год</button></div>
+<div class="bento" id="pl"></div><div id="pn"></div></main>
 <script src="save30.js"></script><script>
-function ask(t){const i=$('#q'),q=(t||i.value).trim();if(!q)return;i.value='';const c=$('#ch');c.insertAdjacentHTML('beforeend','<div class="b u">'+q.replace(/</g,'&lt;')+'</div>');c.insertAdjacentHTML('beforeend','<div class="b">'+rp(q.toLowerCase())+'</div>');c.scrollTop=c.scrollHeight}
+function bub(t,u){const b=document.createElement('div');b.className='b tx'+(u?' u':'');b.textContent=t;$('#ch').append(b);sp(b);b.classList.add('in');$('#ch').scrollTop=1e9}
 function rp(q){const n=+((q.match(/\d[\d\s]*/)||[''])[0].replace(/\s/g,''));
 if(/год|накоп/.test(q))return S.saved>0?'Ваш темп — '+fmt(S.saved)+' за спринт. За год это около '+fmt(S.saved*12)+', а с доходностью 8% — немного больше. Проверьте в симуляторе.':'В трекере пока нет отложенных денег. Закройте несколько дней, и я посчитаю.';
 if(/куп|можно/.test(q)&&n)return n<=S.budget?fmt(n)+' вписывается в бюджет '+fmt(S.budget)+'. После покупки останется '+fmt(S.budget-n)+'.':fmt(n)+' больше бюджета на '+fmt(n-S.budget)+'. Лучше отложить на 30 дней.';
 if(/трат|куда|расход/.test(q))return 'Откройте «Аналитику»: там расходы по категориям и изменение к прошлому месяцу.';
 return 'Я отвечаю на вопросы про накопления за год, про покупки с суммой и про расходы.'}
+function ask(t){const i=$('#q'),q=(t||i.value).trim();if(!q)return;i.value='';bub(q,1);setTimeout(()=>bub(rp(q.toLowerCase())),350)}
+$('#ask').onclick=()=>ask();$('#q').onkeydown=e=>{if(e.key=='Enter')ask()};document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>ask(b.dataset.q));
+bub('Спросите про накопления за год, про покупку («можно ли купить за 5000?») или про расходы.');
 function sim(){const pm=+$('#pm').value,r=$('#rt').value/1200,y=+$('#yr').value;let b=S.saved,a=[b];for(let i=1;i<=y*12;i++){b=b*(1+r)+pm;if(i%12==0)a.push(b)}
-const put=S.saved+pm*y*12;$('#fv').textContent=fmt(b);$('#sp').textContent='Вложено '+fmt(put)+' · доход '+fmt(b-put);
-const mx=Math.max(...a);$('#sv').innerHTML='<polyline fill="none" stroke="#c8401a" stroke-width="3" points="'+a.map((v,i)=>(i/(a.length-1||1)*310+5)+','+(105-v/mx*95)).join(' ')+'"/>'}
-['pm','rt','yr'].forEach(i=>$('#'+i).oninput=sim);sim();
-const PL=[['Старт',0,0,'Трекер спринта и аналитика за 3 месяца'],['Pro',490,4900,'Помощник, симулятор и без ограничений по истории'],['Команда',1490,14900,'Общие бюджеты для семьи или небольшой команды']];let yr=0;
-function tp(y){yr=y;$('#t1').className='btn '+(y?'o':'');$('#t2').className='btn '+(y?'':'o');pl()}
-function pl(){$('#pl').innerHTML=PL.map((p,i)=>'<div class="box tier '+(i==1?'hot':'')+'"><h3>'+p[0]+'</h3><p class="big">'+(p[1]?fmt(yr?p[2]:p[1]):'0 ₽')+'</p><p class="mu" style="font-size:13px">'+(p[1]?(yr?'в год':'в месяц'):'бесплатно')+'</p><p style="margin:12px 0">'+p[3]+'</p><button class="btn '+(i==1?'':'o')+'" onclick="$(\'#pn\').innerHTML=\'<div class=msg>Демо: оплата не подключена.</div>\'">Выбрать</button></div>').join('')}
-pl();</script></body></html>
+const put=S.saved+pm*y*12,mx=Math.max(...a);$('#yl').textContent=y+' лет';tw($('#fv'),b);$('#sp2').textContent='Вложено '+fmt(put)+' · доход '+fmt(b-put);
+$('#ln').setAttribute('d','M'+a.map((v,i)=>(i/(a.length-1||1)*290+5).toFixed(1)+','+(95-v/mx*88).toFixed(1)).join('L'))}
+function draw(){const l=$('#ln');l.style.animation='none';void l.getBoundingClientRect();l.style.animation='dr .9s cubic-bezier(.2,.8,.2,1) both'}
+['pm','rt','yr'].forEach(i=>{$('#'+i).oninput=sim;$('#'+i).onchange=draw});sim();setTimeout(draw,500);
+const PL=[['Старт',0,0,'Трекер спринта и аналитика за 3 месяца'],['Pro',490,4900,'Помощник, симулятор и вся история без ограничений'],['Команда',1490,14900,'Общие бюджеты для семьи или небольшой команды']];let yr=0;
+$('#pl').innerHTML=PL.map((p,i)=>'<div class="c '+(i==1?'l ':'')+'s4 rv"><h3>'+p[0]+'</h3><p class="big" id="pp'+i+'" style="margin:10px 0 2px"></p><p class="mu" id="pu'+i+'" style="font-size:13px"></p><p style="margin:12px 0 18px">'+p[3]+'</p><button class="btn'+(i==1?'':' o')+'" data-p="1" '+(i==1?'style="background:#0a0d0b;color:var(--lime)"':'')+'>Выбрать</button></div>').join('');
+function pl(){PL.forEach((p,i)=>{tw($('#pp'+i),yr?p[2]:p[1]);$('#pu'+i).textContent=p[1]?(yr?'в год':'в месяц'):'бесплатно'})}
+function tp(y){yr=y;$('#t1').className='btn'+(y?' o':'');$('#t2').className='btn'+(y?'':' o');pl()}
+$('#t1').onclick=()=>tp(0);$('#t2').onclick=()=>tp(1);$('#pl').onclick=e=>{if(e.target.dataset.p)$('#pn').innerHTML='<div class="msg">Демо: оплата не подключена.</div>'};pl();
+const st=document.createElement('style');st.textContent='@keyframes dr{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}';document.head.append(st);fx();</script></body></html>

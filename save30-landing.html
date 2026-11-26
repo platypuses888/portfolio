@@ -1,21 +1,20 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — 30 дней, чтобы увидеть, куда уходят деньги</title></head><body><main class="w">
-<p class="k">30-дневный финансовый спринт</p>
-<h1>Тридцать дней, чтобы увидеть, куда уходят деньги.</h1>
-<p class="lead">Не бюджет на всю жизнь, а короткий спринт: каждый день одно маленькое решение — не купить, не заказать, не оформить. В конце вы получаете цифру, которая уже лежит у вас.</p>
-<a class="btn" href="save30-webapp.html">Начать спринт</a> <a class="btn o" href="#calc">Посчитать экономию</a>
-<h2 id="calc">Сколько уходит на лишнее</h2>
-<div class="grid"><div class="box"><label for="sp">Лишние траты в день</label><input id="sp" type="range" min="100" max="2000" step="50" value="400"><p class="big" id="sv" style="margin:12px 0"></p>
-<div class="row"><button class="btn o" data-v="250">Кофе навынос</button><button class="btn o" data-v="600">Доставка еды</button><button class="btn o" data-v="150">Подписки</button></div></div>
-<div class="box"><p class="k" style="margin:0">За 30 дней</p><p class="big g" id="m"></p><hr class="rule"><p class="k" style="margin:0">За год</p><p class="big g" id="y"></p></div></div>
-<h2>Как это работает</h2>
-<div class="grid"><div class="step"><b>1</b><h3>Заведите спринт</h3><p>Назовите себя и получите 30 клеток. Каждая — один день.</p></div>
-<div class="step"><b>2</b><h3>Закрывайте дни</h3><p>Выполнили задание дня — отметили. Каждый день добавляет к накоплениям.</p></div>
-<div class="step"><b>3</b><h3>Ставьте паузу</h3><p>Захотелось купить лишнее? Подождите. Часто желание проходит само.</p></div></div>
-<h2>Остальные части Save30</h2>
-<a class="li" href="save30-webapp.html"><b>Трекер</b><span class="mu">30 дней, задания и пауза на импульс</span></a>
-<a class="li" href="save30-insights.html"><b>Аналитика</b><span class="mu">Расходы по категориям и динамика по месяцам</span></a>
-<a class="li" href="save30-store.html"><b>Магазин</b><span class="mu">Покупки, которые проверяют ваш бюджет</span></a>
-<a class="li" href="save30-ai-saas.html"><b>Pro</b><span class="mu">Помощник, симулятор капитала и тарифы</span></a></main>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — 30 дней, 30 решений</title></head><body><main class="w">
+<p class="k tx">30-дневный финансовый спринт</p>
+<h1 class="tx">30 дней. 30 решений. Ваши деньги.</h1>
+<p class="lead tx">Короткий спринт вместо вечного бюджета: каждый день одно маленькое решение не тратить лишнее. В конце вы получаете цифру, которая уже лежит у вас.</p>
+<a class="btn rv" href="save30-webapp.html">Начать спринт</a> <a class="btn o rv" href="#calc">Посчитать экономию</a>
+<div class="mq"><span>Не купить · Отложить · Подождать · Посчитать · Не купить · Отложить · Подождать · Посчитать ·</span></div>
+<div class="bento" id="calc">
+<div class="c s7 rv"><p class="k" style="margin:0">Лишние траты в день</p><p class="big" id="sv" style="margin:8px 0 14px"></p><input id="sp" type="range" min="100" max="2000" step="50" value="400" aria-label="Лишние траты в день"><div class="row" style="margin-top:16px"><button class="btn o" data-v="250">Кофе</button><button class="btn o" data-v="600">Доставка</button><button class="btn o" data-v="150">Подписки</button></div></div>
+<div class="c l s5 rv"><p class="k" style="margin:0">За 30 дней</p><p class="big" id="m"></p><p class="k" style="margin-top:20px">За год</p><p class="big" id="y"></p></div>
+<div class="c s4 rv"><p class="big" style="color:var(--lime)">01</p><h3>Заведите спринт</h3><p class="mu">Назовите себя и получите 30 клеток, по одной на день.</p></div>
+<div class="c s4 rv"><p class="big" style="color:var(--lime)">02</p><h3>Закрывайте дни</h3><p class="mu">Выполнили задание дня — отметили. Накопления растут.</p></div>
+<div class="c s4 rv"><p class="big" style="color:var(--lime)">03</p><h3>Ставьте паузу</h3><p class="mu">Захотелось лишнего? Подождите. Желание часто проходит само.</p></div></div>
+<h2 class="tx">Четыре части одного продукта</h2>
+<div class="bento"><a class="c s6 rv" href="save30-webapp.html"><p class="k" style="margin:0">Трекер</p><h3>30 дней и пауза на импульс ↗</h3><p class="mu">Задания, прогресс и решения «не покупать».</p></a>
+<a class="c s6 rv" href="save30-insights.html"><p class="k" style="margin:0">Аналитика</p><h3>Куда уходят деньги ↗</h3><p class="mu">Категории, динамика и подсказки по месяцам.</p></a>
+<a class="c s6 rv" href="save30-store.html"><p class="k" style="margin:0">Магазин</p><h3>Покупка с проверкой бюджета ↗</h3><p class="mu">Корзина, которая знает ваш лимит.</p></a>
+<a class="c s6 rv" href="save30-ai-saas.html"><p class="k" style="margin:0">Pro</p><h3>Помощник и симулятор ↗</h3><p class="mu">Накопления на годы вперёд и тарифы.</p></a></div></main>
 <script src="save30.js"></script><script>
-const sl=$('#sp');function upd(){const v=+sl.value;$('#sv').textContent=fmt(v)+' в день';$('#m').textContent=fmt(v*30);$('#y').textContent=fmt(v*365)}
+const sl=$('#sp');function upd(){const v=+sl.value;$('#sv').textContent=fmt(v)+' / день';tw($('#m'),v*30);tw($('#y'),v*365)}
 sl.oninput=upd;document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{sl.value=b.dataset.v;upd()});upd();</script></body></html>

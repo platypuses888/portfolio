@@ -1,20 +1,29 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — трекер спринта</title></head><body><main class="w" id="app"></main>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — трекер спринта</title></head><body><main class="w">
+<section id="gate" hidden><p class="k tx">Вход в спринт</p><h1 class="tx">Как вас зовут?</h1>
+<div class="c rv" style="max-width:480px"><input id="nm" maxlength="24" placeholder="Имя" aria-label="Имя"><p class="mu" style="font-size:13px;margin:10px 0 14px">Имя хранится только в браузере, пароль не нужен.</p><button class="btn" id="go">Начать</button></div></section>
+<section id="app" hidden><p class="k" id="hi">Спринт</p><div class="bento">
+<div class="c l s7 rv"><p class="k" style="margin:0">Задание дня</p><p class="big" id="dn" style="margin:6px 0"></p><h3 id="tk" style="margin-bottom:18px"></h3><button class="btn" id="db" style="background:#0a0d0b;color:var(--lime)"></button></div>
+<div class="c s5 rv"><div class="row" style="flex-wrap:nowrap;gap:18px"><svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true"><circle r="52" cx="60" cy="60" fill="none" stroke="#1c241f" stroke-width="12"/><circle id="rg" r="52" cx="60" cy="60" fill="none" stroke="#c9ff3b" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1)"/></svg><div><p class="k" style="margin:0">Отложено</p><p class="big" id="sv" style="font-size:clamp(28px,4vw,44px)"></p><p class="mu" id="pc"></p></div></div></div>
+<div class="c rv"><p class="k" style="margin:0">30 дней</p><div class="cells" id="cells"></div></div>
+<div class="c rv"><p class="k" style="margin:0">Пауза на импульс</p><div class="row" style="align-items:end;margin-top:6px"><div style="flex:2;min-width:180px"><label for="it">Что хочется купить</label><input id="it" placeholder="Например, кроссовки"></div><div style="flex:1;min-width:120px"><label for="pr">Цена, ₽</label><input id="pr" type="number" min="1" placeholder="5990"></div><button class="btn" id="st">Хочу купить</button></div><div id="pz"></div><div id="lg"></div></div></div></section></main>
 <script src="save30.js"></script><script>
 const TASKS=['Проверьте подписки на кино и музыку','Приготовьте обед дома','Откажитесь от одной доставки','Отмените ненужную подписку','Возьмите кофе из дома','Сравните цену перед покупкой','Пройдитесь пешком вместо такси','Отложите покупку на 24 часа','Просмотрите траты за неделю','Найдите бесплатную замену платному сервису'];
-let pz=null,tm=null,log=[];const app=$('#app');
-const total=()=>Object.keys(S.done).length*350+(S.p||0);
-function go(){S.name=($('#nm').value.trim()||'гость').slice(0,24);save();render()}
-function tg(d){S.done[d]?delete S.done[d]:S.done[d]=1;S.saved=total();save();render()}
-function pzUI(){const e=$('#pz');if(!e)return;if(!pz){e.innerHTML='';return}
-e.innerHTML=pz.left>0?'<div class="msg">Пауза: '+pz.left+' с (в жизни — 24 часа). «'+pz.it+'» за '+fmt(pz.pr)+': это нужно или просто захотелось?</div>':'<div class="msg ok">Пауза прошла. Что решаете?</div><div class="row" style="margin-top:10px"><button class="btn" onclick="dec(1)">Отложить и сохранить '+fmt(pz.pr)+'</button><button class="btn o" onclick="dec(0)">Всё равно куплю</button></div>'}
-function st(){const it=$('#it').value.trim(),pr=+$('#pr').value;if(!it||!(pr>0)){$('#pz').innerHTML='<div class="msg">Укажите, что хотите купить, и цену.</div>';return}
-clearInterval(tm);pz={it,pr,left:10};pzUI();tm=setInterval(()=>{pz.left--;if(pz.left<=0)clearInterval(tm);pzUI()},1000)}
-function dec(s){if(s)S.p+=pz.pr;log.unshift((s?'Отложено: ':'Куплено: ')+pz.it+' · '+fmt(pz.pr));pz=null;S.saved=total();save();render()}
-function render(){if(!S.name){app.innerHTML='<p class="k">Вход</p><h1>Как вас зовут?</h1><div class="box" style="max-width:420px"><label for="nm">Имя</label><input id="nm" maxlength="24"><p class="mu" style="font-size:13px;margin:10px 0">Имя хранится только в вашем браузере, пароль не нужен.</p><button class="btn" onclick="go()">Начать спринт</button></div>';return}
-const n=Object.keys(S.done).length;let nx=1;while(S.done[nx]&&nx<30)nx++;
-app.innerHTML='<p class="k">Спринт · '+S.name+'</p><h1>День '+(n>=30?30:nx)+' из 30</h1><div class="grid"><div class="box"><p class="k" style="margin:0">Отложено</p><p class="big g">'+fmt(total())+'</p><div class="bar" style="margin-top:10px"><i style="width:'+n/30*100+'%"></i></div><p class="mu" style="font-size:13px;margin-top:6px">Выполнено дней: '+n+' из 30</p></div>'+
-'<div class="box"><p class="k" style="margin:0">Задание дня</p><h3 style="margin-top:8px">'+(n>=30?'Спринт пройден':TASKS[(nx-1)%10])+'</h3>'+(n>=30?'':'<button class="btn" onclick="tg('+nx+')">Выполнено · +350 ₽</button>')+'</div></div>'+
-'<h2>30 дней</h2><div class="cells">'+Array.from({length:30},(_,i)=>'<button class="cell '+(S.done[i+1]?'d':'')+'" onclick="tg('+(i+1)+')">'+(i+1)+'</button>').join('')+'</div>'+
-'<h2>Пауза на импульс</h2><div class="box"><div class="grid"><div><label for="it">Что хочется купить</label><input id="it" placeholder="Например, кроссовки"></div><div><label for="pr">Цена, ₽</label><input id="pr" type="number" min="1" placeholder="5990"></div></div><div style="margin-top:14px"><button class="btn" onclick="st()">Хочу купить</button></div><div id="pz"></div>'+
-(log.length?'<hr class="rule">'+log.slice(0,5).map(l=>'<p class="mono" style="font-size:14px">'+l+'</p>').join(''):'')+'</div>';pzUI()}
-S.saved=total();render();</script></body></html>
+let pz=null,tm=null,log=[];const tot=()=>Object.keys(S.done).length*350+(S.p||0);
+$('#cells').innerHTML=Array.from({length:30},(_,i)=>'<button class="cell" style="--i:'+i+'" data-d="'+(i+1)+'">'+(i+1)+'</button>').join('');
+function upd(){const n=Object.keys(S.done).length;let nx=1;while(S.done[nx]&&nx<30)nx++;S.saved=tot();save();
+tw($('#dn'),n>=30?30:nx,v=>'День '+Math.round(v));$('#tk').textContent=n>=30?'Спринт пройден':TASKS[(nx-1)%10];
+const b=$('#db');b.textContent=n>=30?'Готово':'Выполнено · +350 ₽';b.disabled=n>=30;b.dataset.d=nx;
+tw($('#sv'),S.saved);$('#rg').style.strokeDashoffset=326.7*(1-n/30);$('#pc').textContent='Выполнено '+n+' из 30';
+document.querySelectorAll('.cell').forEach((c,i)=>c.classList.toggle('d',!!S.done[i+1]))}
+function tg(d){S.done[d]?delete S.done[d]:S.done[d]=1;upd()}
+$('#cells').onclick=e=>{if(e.target.dataset.d)tg(+e.target.dataset.d)};$('#db').onclick=e=>tg(+e.target.dataset.d);
+function show(){const a=!!S.name;$('#gate').hidden=a;$('#app').hidden=!a;if(a){$('#hi').textContent='Спринт · '+S.name;upd()}fx()}
+$('#go').onclick=()=>{S.name=($('#nm').value.trim()||'гость').slice(0,24);save();show()};
+function pt(){$('#pt').textContent=pz.left>0?'Пауза '+pz.left+' с (в жизни — 24 часа). «'+pz.it+'» за '+fmt(pz.pr)+': нужно или просто захотелось?':'Пауза прошла. Что решаете?';
+if(pz.left<=0)$('#pa').innerHTML='<button class="btn" onclick="dec(1)">Отложить и сохранить '+fmt(pz.pr)+'</button><button class="btn o" onclick="dec(0)">Всё равно куплю</button>'}
+$('#st').onclick=()=>{const it=$('#it').value.trim(),pr=+$('#pr').value,e=$('#pz');if(!it||!(pr>0)){e.innerHTML='<div class="msg">Укажите, что хотите купить, и цену.</div>';return}
+clearInterval(tm);pz={it,pr,left:10};e.innerHTML='<div class="msg" id="pt"></div><div class="bar" style="margin-top:12px"><i id="pb" style="width:100%;transition:width 10s linear"></i></div><div class="row" id="pa" style="margin-top:12px"></div>';
+requestAnimationFrame(()=>requestAnimationFrame(()=>$('#pb').style.width='0%'));pt();tm=setInterval(()=>{pz.left--;pt();if(pz.left<=0)clearInterval(tm)},1000)};
+function dec(s){if(s)S.p+=pz.pr;log.unshift((s?'Отложено: ':'Куплено: ')+pz.it+' · '+fmt(pz.pr));pz=null;$('#pz').innerHTML='';
+$('#lg').innerHTML=log.slice(0,5).map((l,i)=>'<p class="b" style="max-width:none;margin-top:8px">'+esc(l)+'</p>').join('');upd()}
+show();</script></body></html>

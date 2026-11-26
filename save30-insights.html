@@ -1,19 +1,30 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — аналитика</title></head><body><main class="w">
-<p class="k">Демо-данные</p><h1>Куда уходят деньги.</h1><p class="lead">Расходы по категориям, норма сбережений и подсказки, которые считаются из ваших цифр.</p>
-<div class="row" id="tabs"></div><div id="out"></div></main>
+<p class="k tx">Демо-данные</p><h1 class="tx">Куда уходят деньги</h1>
+<div class="row rv" id="seg"></div>
+<div class="bento"><div class="c s5 rv"><svg id="dn" viewBox="0 0 200 200" width="100%" style="max-width:300px;display:block;margin:auto" role="img" aria-label="Расходы по категориям"></svg></div>
+<div class="c s7 rv" id="bars"></div>
+<div class="c s4 rv"><p class="k" style="margin:0">Доход</p><p class="big" id="a"></p></div>
+<div class="c s4 rv"><p class="k" style="margin:0">Расходы</p><p class="big" id="b"></p></div>
+<div class="c l s4 rv"><p class="k" style="margin:0" id="rl"></p><p class="big" id="c"></p></div>
+<div class="c s4 rv"><p class="k" style="margin:0">Главная статья</p><p id="t0"></p></div>
+<div class="c s4 rv"><p class="k" style="margin:0">Динамика</p><p id="t1"></p></div>
+<div class="c s4 rv"><p class="k" style="margin:0">Норма сбережений</p><p id="t2"></p></div></div></main>
 <script src="save30.js"></script><script>
 const D={'Сентябрь':{inc:78000,c:{Жильё:32000,Еда:14800,Транспорт:4300,Подписки:3100,Досуг:7200,Покупки:10400}},'Октябрь':{inc:78000,c:{Жильё:32000,Еда:15200,Транспорт:4100,Подписки:3100,Досуг:6400,Покупки:8700}},'Ноябрь':{inc:81000,c:{Жильё:32000,Еда:14100,Транспорт:4400,Подписки:2400,Досуг:5900,Покупки:7300}}};
-const K=Object.keys(D);let cu=2;const sum=o=>Object.values(o).reduce((a,b)=>a+b,0);
-function draw(){$('#tabs').innerHTML=K.map((k,i)=>'<button class="btn '+(i==cu?'':'o')+'" onclick="cu='+i+';draw()">'+k+'</button>').join('');
-const m=D[K[cu]],pv=cu?D[K[cu-1]]:null,ex=sum(m.c),sv=m.inc-ex,rt=Math.round(sv/m.inc*100);
-const rows=Object.entries(m.c).sort((a,b)=>b[1]-a[1]),mx=rows[0][1];
-const dl=rows.map(([k,v])=>[k,pv?v-pv.c[k]:0]);const gr=dl.slice().sort((a,b)=>b[1]-a[1])[0],dr=dl.slice().sort((a,b)=>a[1]-b[1])[0];
-const mxI=Math.max(...K.map(k=>D[k].inc));
-const svg='<svg viewBox="0 0 360 180" width="100%" role="img" aria-label="Расходы и доходы по месяцам">'+K.map((k,i)=>{const e=sum(D[k].c),h=e/mxI*140,x=30+i*110;return '<rect x="'+x+'" y="'+(150-h)+'" width="60" height="'+h+'" fill="'+(i==cu?'#171512':'#d8d0bf')+'"/><line x1="'+(x-8)+'" x2="'+(x+68)+'" y1="'+(150-D[k].inc/mxI*140)+'" y2="'+(150-D[k].inc/mxI*140)+'" stroke="#1f5c3a" stroke-width="3"/><text x="'+(x+30)+'" y="168" font-size="12" text-anchor="middle" fill="#6f685b">'+k.slice(0,3)+'</text>'}).join('')+'</svg>';
-$('#out').innerHTML='<div class="grid" style="margin-top:20px"><div class="box"><p class="k" style="margin:0">Доход</p><p class="big">'+fmt(m.inc)+'</p></div><div class="box"><p class="k" style="margin:0">Расходы</p><p class="big">'+fmt(ex)+'</p></div><div class="box"><p class="k" style="margin:0">Осталось · '+rt+'%</p><p class="big g">'+fmt(sv)+'</p></div></div>'+
-'<div class="grid" style="margin-top:16px"><div class="box"><h3>По категориям</h3>'+rows.map(([k,v],i)=>'<div style="margin-top:14px"><div class="row" style="justify-content:space-between"><span>'+k+'</span><span class="mono">'+fmt(v)+(pv?' <span class="'+(dl[i][1]>0?'r':'g')+'">'+(dl[i][1]>0?'+':'')+Math.round(dl[i][1])+'</span>':'')+'</span></div><div class="bar"><i style="width:'+v/mx*100+'%;background:#171512"></i></div></div>').join('')+'</div>'+
-'<div class="box"><h3>Три месяца</h3><p class="mu" style="font-size:13px">Столбец — расходы, зелёная черта — доход.</p>'+svg+'</div></div>'+
-'<h2>Подсказки</h2><div class="grid"><div class="box"><p>Больше всего уходит на <b>'+rows[0][0].toLowerCase()+'</b> — '+Math.round(rows[0][1]/ex*100)+'% расходов.</p></div>'+
-(pv?'<div class="box"><p>'+(gr[1]>0?'Сильнее всего выросли «'+gr[0]+'»: '+fmt(gr[1])+' к прошлому месяцу.':'Ни одна категория не выросла к прошлому месяцу.')+'</p></div><div class="box"><p>Лучшее снижение: «'+dr[0]+'», '+fmt(-dr[1])+'.</p></div>':'')+
-'<div class="box"><p>'+(rt<20?'Норма сбережений '+rt+'% — ниже 20%. Начните с гибких категорий.':'Норма сбережений '+rt+'% — выше ориентира в 20%.')+'</p></div></div>'}
-draw();</script></body></html>
+const K=Object.keys(D),CL=['#c9ff3b','#f2f5ee','#ff6a4d','#7bdcb5','#ffd166','#5b6b60'],C=2*Math.PI*70,cats=Object.keys(D[K[0]].c);let cu=2;
+const sum=o=>Object.values(o).reduce((a,b)=>a+b,0);
+$('#dn').innerHTML=cats.map((c,i)=>'<circle r="70" cx="100" cy="100" fill="none" stroke="'+CL[i]+'" stroke-width="26" transform="rotate(-90 100 100)" stroke-dasharray="0 '+C+'" style="transition:stroke-dasharray .9s cubic-bezier(.2,.8,.2,1),stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)"/>').join('')+'<text id="rt" x="100" y="110" text-anchor="middle" font-size="30" font-weight="900" fill="#f2f5ee"></text>';
+$('#bars').innerHTML=cats.map((c,i)=>'<div style="margin-bottom:14px"><div class="row" style="justify-content:space-between"><span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+CL[i]+';margin-right:8px"></i>'+c+'</span><span><b id="v'+i+'"></b> <small id="d'+i+'"></small></span></div><div class="bar"><i id="r'+i+'"></i></div></div>').join('');
+$('#seg').innerHTML=K.map((k,i)=>'<button class="btn" data-i="'+i+'">'+k+'</button>').join('');
+$('#seg').onclick=e=>{if(e.target.dataset.i){cu=+e.target.dataset.i;draw()}};
+function flash(e,t){e.textContent=t;e.classList.remove('flash');void e.offsetWidth;e.classList.add('flash')}
+function draw(){document.querySelectorAll('#seg .btn').forEach((b,i)=>b.className='btn'+(i==cu?'':' o'));
+const m=D[K[cu]],pv=cu?D[K[cu-1]]:null,ex=sum(m.c),sv=m.inc-ex,rt=Math.round(sv/m.inc*100),mx=Math.max(...Object.values(m.c));let cum=0;
+const dl=cats.map(c=>pv?m.c[c]-pv.c[c]:0),ig=dl.indexOf(Math.max(...dl)),id=dl.indexOf(Math.min(...dl)),big=cats.indexOf(Object.keys(m.c).sort((a,b)=>m.c[b]-m.c[a])[0]);
+cats.forEach((c,i)=>{const f=m.c[c]/ex,ci=document.querySelectorAll('#dn circle')[i];ci.setAttribute('stroke-dasharray',Math.max(f*C-3,0)+' '+C);ci.setAttribute('stroke-dashoffset',-cum*C);cum+=f;
+tw($('#v'+i),m.c[c]);$('#r'+i).style.width=m.c[c]/mx*100+'%';const d=$('#d'+i);d.textContent=pv?(dl[i]>0?'+':'')+Math.round(dl[i]):'';d.style.color=dl[i]>0?'#ff6a4d':'#c9ff3b'});
+$('#rt').textContent=rt+'%';tw($('#a'),m.inc);tw($('#b'),ex);tw($('#c'),sv);$('#rl').textContent='Осталось · '+rt+'%';
+flash($('#t0'),cats[big]+' — '+Math.round(m.c[cats[big]]/ex*100)+'% всех расходов.');
+flash($('#t1'),pv?(dl[ig]>0?'Сильнее всего выросли «'+cats[ig]+'»: '+fmt(dl[ig])+'. Лучше снизились «'+cats[id]+'»: '+fmt(-dl[id])+'.':'Ни одна категория не выросла к прошлому месяцу.'):'Для первого месяца сравнения пока нет.');
+flash($('#t2'),rt<20?rt+'% — ниже ориентира в 20%. Начните с гибких категорий.':rt+'% — выше ориентира в 20%.')}
+setTimeout(draw,450);</script></body></html>

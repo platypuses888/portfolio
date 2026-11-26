@@ -1,20 +1,22 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — магазин с проверкой бюджета</title></head><body><main class="w">
-<p class="k">Магазин</p><h1>Покупка, которая сверяется с бюджетом.</h1>
-<div class="grid"><div class="box"><label for="bd">Свободный бюджет на месяц, ₽</label><input id="bd" type="number" min="0"><p class="mu" style="font-size:13px;margin-top:8px" id="left"></p></div>
-<div class="box"><p class="k" style="margin:0">Корзина</p><div id="cart"></div><div id="note"></div></div></div>
-<h2>Каталог</h2><div class="grid" id="cat"></div>
-<h2>Отложено на 30 дней</h2><div id="wl" class="mu">Пока пусто.</div></main>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="save30.css"><title>Save30 — магазин</title></head><body><main class="w">
+<p class="k tx">Магазин</p><h1 class="tx">Покупка сверяется с бюджетом</h1>
+<div class="shop"><div class="tiles" id="cat"></div>
+<aside class="side c rv"><label for="bd" style="margin-top:0">Свободный бюджет, ₽</label><input id="bd" type="number" min="0"><div class="bar" style="margin:14px 0 6px"><i id="bb"></i></div><p class="mu" style="font-size:13px">Осталось <b id="lf" style="color:var(--ink)"></b></p>
+<p class="k">Корзина</p><div id="cart"></div><div class="li" style="font-weight:800"><span>Итого</span><span id="tt"></span></div><button class="btn" id="buy" style="margin-top:12px">Оформить</button><div id="note"></div>
+<p class="k">Отложено на 30 дней</p><div id="wl" class="mu" style="font-size:14px">Пока пусто.</div></aside></div></main>
 <script src="save30.js"></script><script>
-const I=[['Беспроводные наушники',7490,'Звук','#e8d9c0'],['Кроссовки беговые',5990,'Спорт','#d7e2d3'],['Городской рюкзак',3490,'Сумки','#e3d4cd'],['Ручная кофемолка',2190,'Кухня','#dfdbc9'],['Настольная лампа',2790,'Дом','#e6dcc2'],['Книга по инвестициям',890,'Книги','#d9d4e0'],['Термокружка',1190,'Кухня','#d3dfe0'],['Умные часы',12990,'Гаджеты','#e4d0d0']];
-let cart=[],wl=[];const sm=()=>cart.reduce((a,i)=>a+I[i][1],0),bd=$('#bd');bd.value=S.budget;
+const I=[['Беспроводные наушники',7490,'Звук','#c9ff3b','50%'],['Кроссовки беговые',5990,'Спорт','#f2f5ee','14px'],['Городской рюкзак',3490,'Сумки','#ff6a4d','50% 50% 12px 12px'],['Ручная кофемолка',2190,'Кухня','#ffd166','8px 50%'],['Настольная лампа',2790,'Дом','#7bdcb5','50% 8px'],['Книга по инвестициям',890,'Книги','#c9ff3b','4px'],['Термокружка',1190,'Кухня','#f2f5ee','50%'],['Умные часы',12990,'Гаджеты','#ff6a4d','50% 50% 0 0']];
+let cart=[],wl=[],last=-1;const sm=()=>cart.reduce((a,i)=>a+I[i][1],0),bd=$('#bd');bd.value=S.budget;
+$('#cat').innerHTML=I.map((t,i)=>'<div class="c it rv" id="t'+i+'"><div class="ph" style="background:'+t[3]+'"><i style="border-radius:'+t[4]+'"></i></div><h3 style="font-size:19px">'+t[0]+'</h3><p class="mu" style="font-size:13px">'+t[2]+'</p><div class="row" style="justify-content:space-between;margin-top:12px"><b>'+fmt(t[1])+'</b><button class="btn" data-i="'+i+'"></button></div></div>').join('');
+$('#cat').onclick=e=>{let i=e.target.dataset.i;if(i==null)return;i=+i;const p=I[i][1];
+if(sm()+p>S.budget){const t=$('#t'+i);t.classList.remove('shake');void t.offsetWidth;t.classList.add('shake');$('#note').innerHTML='<div class="msg">«'+I[i][0]+'» стоит '+fmt(p)+', а осталось '+fmt(S.budget-sm())+'.<div style="margin-top:8px"><button class="btn o" data-w="'+i+'">Отложить на 30 дней</button></div></div>';return}
+cart.push(i);last=cart.length-1;$('#note').innerHTML='';draw()};
+$('#note').onclick=e=>{if(e.target.dataset.w!=null){wl.push(+e.target.dataset.w);$('#note').innerHTML='';draw()}};
+$('#cart').onclick=e=>{if(e.target.dataset.x!=null){cart.splice(+e.target.dataset.x,1);last=-1;draw()}};
 bd.oninput=()=>{S.budget=Math.max(0,+bd.value||0);save();draw()};
-function add(i){const p=I[i][1];if(sm()+p>S.budget){$('#note').innerHTML='<div class="msg">Не вписывается: «'+I[i][0]+'» стоит '+fmt(p)+', а в бюджете осталось '+fmt(S.budget-sm())+'.<div style="margin-top:8px"><button class="btn o" onclick="lt('+i+')">Отложить на 30 дней</button></div></div>';return}
-cart.push(i);$('#note').innerHTML='';draw()}
-function lt(i){wl.push(i);$('#note').innerHTML='';draw()}
-function rm(k){cart.splice(k,1);draw()}
-function buy(){S.budget-=sm();bd.value=S.budget;cart=[];save();draw();$('#note').innerHTML='<div class="msg ok">Заказ оформлен. Бюджет обновлён.</div>'}
-function draw(){$('#left').textContent='После корзины останется '+fmt(S.budget-sm());
-$('#cart').innerHTML=cart.length?cart.map((i,k)=>'<div class="li"><span>'+I[i][0]+'</span><span class="mono">'+fmt(I[i][1])+' <button class="btn o" style="padding:2px 8px" onclick="rm('+k+')" aria-label="Убрать">×</button></span></div>').join('')+'<div class="li"><b>Итого</b><b class="mono">'+fmt(sm())+'</b></div><button class="btn" onclick="buy()">Оформить</button>':'<p class="mu">Пусто.</p>';
-$('#cat').innerHTML=I.map((t,i)=>'<div class="box"><div class="ph" style="background:'+t[3]+'">'+t[2]+'</div><h3>'+t[0]+'</h3><p class="mono" style="margin-bottom:12px">'+fmt(t[1])+'</p><button class="btn '+(sm()+t[1]>S.budget?'o':'')+'" onclick="add('+i+')">'+(sm()+t[1]>S.budget?'Не по бюджету':'В корзину')+'</button></div>').join('');
-if(wl.length)$('#wl').innerHTML=wl.map(i=>'<div class="li"><span>'+I[i][0]+'</span><span class="mono">'+fmt(I[i][1])+'</span></div>').join('')}
+$('#buy').onclick=()=>{if(!cart.length)return;S.budget-=sm();bd.value=S.budget;cart=[];save();draw();$('#note').innerHTML='<div class="msg ok">Заказ оформлен. Бюджет обновлён.</div>'};
+function draw(){const s=sm(),l=S.budget-s;tw($('#lf'),l);tw($('#tt'),s);$('#bb').style.width=(S.budget?Math.min(100,s/S.budget*100):100)+'%';$('#buy').disabled=!cart.length;
+I.forEach((t,i)=>{const b=document.querySelector('#t'+i+' .btn'),ok=s+t[1]<=S.budget;b.textContent=ok?'В корзину':'Не по бюджету';b.className='btn'+(ok?'':' o')});
+$('#cart').innerHTML=cart.length?cart.map((i,k)=>'<div class="li'+(k==last?' flash':'')+'"><span>'+I[i][0]+'</span><span>'+fmt(I[i][1])+' <button class="btn o" style="padding:2px 10px" data-x="'+k+'" aria-label="Убрать">×</button></span></div>').join(''):'<p class="mu" style="font-size:14px">Пусто.</p>';
+if(wl.length)$('#wl').innerHTML=wl.map(i=>'<div class="li"><span>'+I[i][0]+'</span><span>'+fmt(I[i][1])+'</span></div>').join('')}
 draw();</script></body></html>
